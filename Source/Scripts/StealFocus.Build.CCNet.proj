@@ -21,29 +21,6 @@
       <BuildLabelNumber>$(CCNetLabel)</BuildLabelNumber>
       <BuildLabel>$(BranchName)-$(BuildLabelNumber)</BuildLabel>
       <DropLocationForBuild>$(DropLocation)\$(BranchName)\$(BuildLabelNumber)</DropLocationForBuild>
-      <IsAllConfigurationsBuild>true</IsAllConfigurationsBuild>
-      <IsCommandLineBuild>true</IsCommandLineBuild>
-      <IsDeploymentBuild>true</IsDeploymentBuild>
-      <IsDesktopBuild>false</IsDesktopBuild>
-    </PropertyGroup>
-    <!-- Determine whether to build the documentation. -->
-    <PropertyGroup Condition=" '$(CCNetRequestSource)'=='IntervalTrigger' ">
-      <IsDocumentationBuild>false</IsDocumentationBuild>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(CCNetRequestSource)'!='Scheduled' And '$(CCNetBuildCondition)'=='ForceBuild' ">
-      <IsDocumentationBuild>false</IsDocumentationBuild>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(CCNetRequestSource)'=='Scheduled' And '$(CCNetBuildCondition)'=='ForceBuild' ">
-      <!--<IsDocumentationBuild>true</IsDocumentationBuild>-->
-      <IsDocumentationBuild>false</IsDocumentationBuild>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(IsDocumentationBuild)'=='' ">
-      <IsDocumentationBuild>false</IsDocumentationBuild>
-    </PropertyGroup>
-    <!-- Determine other properties. -->
-    <PropertyGroup>
-      <IsInitialiseEnvironmentBuild>true</IsInitialiseEnvironmentBuild>
-      <IsPackagedBuild>true</IsPackagedBuild>
       <VersionNumber>$(CCNetLabel)</VersionNumber>
     </PropertyGroup>
     <!-- Log the properties we are using. -->
@@ -67,27 +44,6 @@
       Text="Using 'DropLocationForBuild' = '$(DropLocationForBuild)'." />
     <Message
       Importance="high"
-      Text="Using 'IsAllConfigurationsBuild' = '$(IsAllConfigurationsBuild)'." />
-    <Message
-      Importance="high"
-      Text="Using 'IsCommandLineBuild' = '$(IsCommandLineBuild)'." />
-    <Message
-      Importance="high"
-      Text="Using 'IsDeploymentBuild' = '$(IsDeploymentBuild)'." />
-    <Message
-      Importance="high"
-      Text="Using 'IsDesktopBuild' = '$(IsDesktopBuild)'." />
-    <Message
-      Importance="high"
-      Text="Using 'IsDocumentationBuild' = '$(IsDocumentationBuild)'." />
-    <Message
-      Importance="high"
-      Text="Using 'IsInitialiseEnvironmentBuild' = '$(IsInitialiseEnvironmentBuild)'." />
-    <Message
-      Importance="high"
-      Text="Using 'IsPackagedBuild' = '$(IsPackagedBuild)'." />
-    <Message
-      Importance="high"
       Text="Using 'MajorVersionNumber' = '$(MajorVersionNumber)'." />
     <Message
       Importance="high"
@@ -95,9 +51,9 @@
     <Message
       Importance="high"
       Text="Using 'VersionNumber' = '$(VersionNumber)'." />
-    <MSBuild
-      Projects="Beazley.Core.Build.proj"
-      Properties="BranchName=$(BranchName);BuildLabel=$(BuildLabel);BuildLabelNumber=$(BuildLabelNumber);DropLocationForBuild=$(DropLocationForBuild);IsAllConfigurationsBuild=$(IsAllConfigurationsBuild);IsCommandLineBuild=$(IsCommandLineBuild);IsDeploymentBuild=$(IsDeploymentBuild);IsDesktopBuild=$(IsDesktopBuild);IsDocumentationBuild=$(IsDocumentationBuild);IsInitialiseEnvironmentBuild=$(IsInitialiseEnvironmentBuild);IsPackagedBuild=$(IsPackagedBuild);VersionNumber=$(VersionNumber)" />
+    
+    
+    
   </Target>
 
 </Project>

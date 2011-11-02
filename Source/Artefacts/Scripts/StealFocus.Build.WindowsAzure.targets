@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project 
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- 
+    IMPORTANT - please do not customise this .targets file. Modifications will affect all Solutions using the software 
+    factory and maybe overridden by future updates to the software factory. Customise your build process by editing 
+    the *.targets/*.proj files in your solution.
+  -->
+
+  <Target Name="PublishAzurePackages">
+    <Error
+      Condition=" '$(AzureSubscriptionId)'=='' "
+      Text="Please supply 'AzureSubscriptionId' property." />
+    <Error
+      Condition=" '$(AzureManagementCertificateThumbprint)'=='' "
+      Text="Please supply 'AzureManagementCertificateThumbprint' property." />
+    <Error
+      Condition=" '$(DeployForTest)'=='' "
+      Text="Please supply a 'DeployForTest' property." />
+    <Exec
+      Condition=" '%(AzurePublishAction.DeployForTest)'=='$(DeployForTest)' "
+      Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File .\StealFocus.Build.WindowsAzure.PublishAzurePackages.ps1 -subscriptionId %22$(AzureSubscriptionId)%22 -managementCertificateThumbprint %22$(AzureManagementCertificateThumbprint)%22 -affinityGroupName %22%(AzurePublishAction.AffinityGroupName)%22 -affinityGroupLabel %22%(AzurePublishAction.AffinityGroupLabel)%22 -affinityGroupLocation %22%(AzurePublishAction.AffinityGroupLocation)%22 -hostedServiceName %22%(AzurePublishAction.HostedServiceName)%22 -hostedServiceLabel %22%(AzurePublishAction.HostedServiceLabel)%22 -storageAccountName %22%(AzurePublishAction.StorageAccountName)%22 -storageAccountLabel %22%(AzurePublishAction.StorageAccountLabel)%22 -packageFilePath %22%(AzurePublishAction.PackageFilePath)%22 -configurationFilePath %22%(AzurePublishAction.ConfigurationFilePath)%22 -deploymentLabel %22%(AzurePublishAction.DeploymentLabel)%22 -removeStagingEnvironmentAfterwards %(AzurePublishAction.RemoveStagingEnvironmentAfterwards) -promoteToProductionEnvironment %(AzurePublishAction.PromoteToProductionEnvironment)"
+      WorkingDirectory="." />
+  </Target>
+  
+</Project>

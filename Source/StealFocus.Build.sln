@@ -1,8 +1,44 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{6A09D61F-58E9-431B-82A2-63E13EBD7744}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Artefacts", "Artefacts", "{16AF1373-D90E-497F-8C67-231E5C91EEE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{C05C9738-60B2-462D-8E03-0F3611296AC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{CCD282DB-4EBC-45F7-BCD5-EEE614A82FB1}"
+	ProjectSection(SolutionItems) = preProject
+		Artefacts\Scripts\StealFocus.Build.BizTalk2009.targets = Artefacts\Scripts\StealFocus.Build.BizTalk2009.targets
+		Artefacts\Scripts\StealFocus.Build.BizTalk2010.targets = Artefacts\Scripts\StealFocus.Build.BizTalk2010.targets
+		Artefacts\Scripts\StealFocus.Build.IIS7.x.targets = Artefacts\Scripts\StealFocus.Build.IIS7.x.targets
+		Artefacts\Scripts\StealFocus.Build.MSDeploy2.1.targets = Artefacts\Scripts\StealFocus.Build.MSDeploy2.1.targets
+		Artefacts\Scripts\StealFocus.Build.MSTest2010.targets = Artefacts\Scripts\StealFocus.Build.MSTest2010.targets
+		Artefacts\Scripts\StealFocus.Build.NUnit.targets = Artefacts\Scripts\StealFocus.Build.NUnit.targets
+		Artefacts\Scripts\StealFocus.Build.Project.Assembly.targets = Artefacts\Scripts\StealFocus.Build.Project.Assembly.targets
+		Artefacts\Scripts\StealFocus.Build.Project.CSharp.targets = Artefacts\Scripts\StealFocus.Build.Project.CSharp.targets
+		Artefacts\Scripts\StealFocus.Build.Project.targets = Artefacts\Scripts\StealFocus.Build.Project.targets
+		Artefacts\Scripts\StealFocus.Build.Project.VisualBasic.targets = Artefacts\Scripts\StealFocus.Build.Project.VisualBasic.targets
+		Artefacts\Scripts\StealFocus.Build.psm1 = Artefacts\Scripts\StealFocus.Build.psm1
+		Artefacts\Scripts\StealFocus.Build.state = Artefacts\Scripts\StealFocus.Build.state
+		Artefacts\Scripts\StealFocus.Build.StyleCop.targets = Artefacts\Scripts\StealFocus.Build.StyleCop.targets
+		Artefacts\Scripts\StealFocus.Build.targets = Artefacts\Scripts\StealFocus.Build.targets
+		Artefacts\Scripts\StealFocus.Build.tasks = Artefacts\Scripts\StealFocus.Build.tasks
+		Artefacts\Scripts\StealFocus.Build.ValidatePrerequisites.ps1 = Artefacts\Scripts\StealFocus.Build.ValidatePrerequisites.ps1
+		Artefacts\Scripts\StealFocus.Build.WindowsAzure.psm1 = Artefacts\Scripts\StealFocus.Build.WindowsAzure.psm1
+		Artefacts\Scripts\StealFocus.Build.WindowsAzure.PublishAzurePackages.ps1 = Artefacts\Scripts\StealFocus.Build.WindowsAzure.PublishAzurePackages.ps1
+		Artefacts\Scripts\StealFocus.Build.WindowsAzure.targets = Artefacts\Scripts\StealFocus.Build.WindowsAzure.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{A858E3FC-FB16-439E-AA0C-3DF944FE7181}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C05C9738-60B2-462D-8E03-0F3611296AC9} = {16AF1373-D90E-497F-8C67-231E5C91EEE0}
+		{CCD282DB-4EBC-45F7-BCD5-EEE614A82FB1} = {16AF1373-D90E-497F-8C67-231E5C91EEE0}
+		{A858E3FC-FB16-439E-AA0C-3DF944FE7181} = {16AF1373-D90E-497F-8C67-231E5C91EEE0}
 	EndGlobalSection
 EndGlobal

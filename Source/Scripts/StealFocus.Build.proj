@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Default">
+
+  <Target Name="Default">
+    <ItemGroup>
+      <ScriptFiles Include="..\Artefacts\Scripts\*.*" />
+    </ItemGroup>
+    <Copy
+      SourceFiles="@(ScriptFiles)"
+      DestinationFolder="..\Artefacts\NuGet\StealFocus.Build\Scripts" />
+    <Exec
+      Command="..\..\..\..\Tools\NuGet\NuGet.exe pack StealFocus.Build.nuspec -Version $(VersionNumber)"
+      WorkingDirectory="..\Artefacts\NuGet\StealFocus.Build" />
+  </Target>
+
+</Project>

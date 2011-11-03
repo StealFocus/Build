@@ -1,0 +1,93 @@
+To Do
+=====
+ - MSI and different configurations (so we can migrate other solutions in)
+ - Sandcastle
+ - Before and After events for IIS steps
+ - Mobile version of Beazley tasks
+ - Have a deployment build following the compile build
+ - Split out azure sections of build script so we can run in a deployment build (msdeploy is already spilt so can called separately)
+ - Install TFS to 14
+ - Test for whitespace in path
+ - Add generic scripts to create NuGet package.
+
+C:\Workspaces\Temp\Acme.MSBuildTest\Trunk\Source\Scripts
+%SystemDrive%\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe Acme.PetShop.Build.proj /t:PublishAzurePackages /p:DeployForTest=false
+
+msbuild Acme.PetShop.Build.proj /p:ForceInitialiseEnvironment=true;DeleteBuildDirectory=true;DeleteMSTestResultsDirectory=true
+
+msbuild Acme.PetShop.Build.proj /v:m
+
+msbuild Acme.PetShop.Build.proj /v:q
+
+msbuild Acme.PetShop.Build.proj
+
+CommandFiles
+ - Initialisation build (Full build?)
+ - Normal build
+ - Quick build
+
+TFS 2010 - DefaultTemplate.xaml
+===============================
+Run On Agent
+- Initialize Variables
+- Initialize Workspace
+- CreateLabel
+- Compile and Test (for each configuration)
+  - Initialize Variables
+  - Compile
+  - Test
+- AssociateChangesetsAndWorkItems
+
+TFS 2008
+========
+BeforeEndToEndIteration
+BuildNumberOverrideTarget
+AfterEndToEndIteration
+BeforeClean
+AfterClean
+BeforeCleanSolution
+AfterCleanSolution
+BeforeInitializeWorkspace
+AfterInitializeWorkspace
+BeforeGet
+AfterGet
+BeforeLabel
+AfterLabel
+BeforeCompile
+AfterCompile
+BeforeCompileConfiguration
+AfterCompileConfiguration
+BeforeCompileSolution
+AfterCompileSolution
+BeforeGetChangesetsAndUpdateWorkItems
+AfterGetChangesetsAndUpdateWorkItems
+BeforeTest
+BeforeTestConfiguration
+AfterTestConfiguration
+AfterTest
+GenerateDocumentation
+PackageBinaries
+BeforeOnBuildBreak
+AfterOnBuildBreak
+BeforeGetChangesetsOnBuildBreak
+AfterGetChangesetsOnBuildBreak
+BeforeCreateWorkItem
+AfterCreateWorkItem
+
+Kata
+====
+v1.1 (BizTalk)
+RemoveDependentBizTalkApplications
+StopBizTalkApplication
+RemoveBizTalkApplicationAssembliesFromGac
+RemoveBizTalkApplication
+DeleteBizTalkHandlers
+DeleteBizTalkHosts
+CreateBizTalkHosts
+CreateBizTalkHandlers
+CreateBizTalkApplication
+ExportBizTalkApplication
+ImportBindingsForBizTalkApplication
+StartBizTalkApplication
+
+==============================================================================================================================

@@ -28,4 +28,6 @@ _ReSharper*/
 obj/
 Thumbs.db
 
+/Source/Artefacts/NuGet/StealFocus.Build/Scripts
+/Source/Artefacts/NuGet/StealFocus.Build/*.nupkg
 !/Tools/NuGet/NuGet.exe

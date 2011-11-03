@@ -51,9 +51,9 @@
     <Message
       Importance="high"
       Text="Using 'VersionNumber' = '$(VersionNumber)'." />
-    
-    
-    
+    <MSBuild
+      Projects="StealFocus.Build.proj"
+      Properties="VersionNumber=$(VersionNumber)" />
   </Target>
 
 </Project>

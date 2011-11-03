@@ -4,7 +4,7 @@
   <!-- 
     IMPORTANT - you must import these targets for the build scripts to function.
   -->
-  <Import Project="StealFocus.Build.Project.CSharp.targets" />
+  <Import Project="..\..\..\..\Artefacts\Scripts\StealFocus.Build.Project.CSharp.targets" />
   <Import Project="Acme.PetShop.Build.Project.Assembly.targets" />
 
   <PropertyGroup>

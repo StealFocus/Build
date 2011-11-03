@@ -4,7 +4,7 @@
 
   <!-- IMPORTANT - you must import these targets for the build scripts to function. -->
   <Import Project="Acme.PetShop.targets" />
-  <Import Project="StealFocus.Build.targets" />
+  <Import Project="..\..\..\..\Artefacts\Scripts\StealFocus.Build.targets" />
   
   <PropertyGroup Condition=" '$(BuildReleaseConfiguration)'=='' ">
     <BuildReleaseConfiguration>true</BuildReleaseConfiguration>
@@ -115,11 +115,11 @@
     <!-- Add "WebApplicationPool" items as required. These will create AppPools in IIS with the provided settings. -->
     <WebApplicationPool Include="AcmeWebSite">
       <!-- IdentityType = LocalSystem | LocalService | NetworkService | SpecificUser -->
-      <IdentityType>SpecificUser</IdentityType>
+      <IdentityType>NetworkService</IdentityType>
       <!-- Enter the user credentials below when choosing 'SpecificUser' as the 'IdentityType'. -->
-      <Domain>BFL</Domain>
-      <Username>hibbc</Username>
-      <Password>V3rt1g014</Password>
+      <Domain></Domain>
+      <Username></Username>
+      <Password></Password>
       <!-- ManagedRuntimeVersion = v2.0 | v4.0 -->
       <ManagedRuntimeVersion>v4.0</ManagedRuntimeVersion>
       <!-- PipelineMode = Integrated | Classic -->
@@ -156,7 +156,7 @@
 
   <ItemGroup>
     <!-- Add "WebSite" items as required. These will create web sites in IIS with the provided settings. -->
-    <WebSite Include="..\WebSite">
+    <WebSite Include="$(SolutionDirectoryPath)\WebSite">
       <Name>AcmeWebSite</Name>
       <Port>999</Port>
       <WebApplicationPoolName>AcmeWebSite</WebApplicationPoolName>
@@ -165,7 +165,7 @@
       <DigestAuthentication>false</DigestAuthentication>
       <WindowsAuthentication>true</WindowsAuthentication>
     </WebSite>
-    <WebSite Include="..\WebSite2">
+    <WebSite Include="$(SolutionDirectoryPath)\WebSite2">
       <Name>AcmeWebSite2</Name>
       <Port>888</Port>
       <WebApplicationPoolName>AcmeWebSite</WebApplicationPoolName>
@@ -214,7 +214,7 @@
       <DigestAuthentication>false</DigestAuthentication>
       <WindowsAuthentication>false</WindowsAuthentication>
     </WebApplication>
-    <WebApplication Include="$(SolutionDirectoryPath)\Acme.PetShop.Web.UI">
+    <!--<WebApplication Include="$(SolutionDirectoryPath)\Acme.PetShop.Web.UI">
       <Name>Acme.PetShop.Web.UI</Name>
       <WebSiteName>AcmeWebSite</WebSiteName>
       <WebApplicationPoolName>Acme.PetShop.Web.UI</WebApplicationPoolName>
@@ -222,7 +222,7 @@
       <BasicAuthentication>false</BasicAuthentication>
       <DigestAuthentication>false</DigestAuthentication>
       <WindowsAuthentication>true</WindowsAuthentication>
-    </WebApplication>
+    </WebApplication>-->
   </ItemGroup>
   
   <ItemGroup>
@@ -290,6 +290,18 @@
 
   <Target Name="BeforeInitialiseEnvironmentCustom">
     <!-- Enter your custom steps here. -->
+    <MakeDir
+      Condition=" !Exists('..\WebApp1') "
+      Directories="..\WebApp1" />
+    <MakeDir
+      Condition=" !Exists('..\WebApp2') "
+      Directories="..\WebApp2" />
+    <MakeDir
+      Condition=" !Exists('..\WebSite') "
+      Directories="..\WebSite" />
+    <MakeDir
+      Condition=" !Exists('..\WebSite2') "
+      Directories="..\WebSite2" />
   </Target>
 
   <Target Name="AfterInitialiseEnvironmentCustom">

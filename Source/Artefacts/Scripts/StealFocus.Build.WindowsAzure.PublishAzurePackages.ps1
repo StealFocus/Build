@@ -1,5 +1,6 @@
 ﻿param
 (
+	[string]$currentDirectory = $(throw '$currentDirectory is a required parameter'),
 	[string]$subscriptionId = $(throw "subscriptionId is required"),
 	[string]$managementCertificateThumbprint = $(throw "managementCertificateThumbprint is required"),
 	[string]$affinityGroupName = $(throw "affinityGroupName is required"),
@@ -19,7 +20,7 @@
 [bool]$removeStagingEnvironmentAfterwardsValue = [System.Convert]::ToBoolean($removeStagingEnvironmentAfterwards)
 [bool]$promoteToProductionEnvironmentValue = [System.Convert]::ToBoolean($promoteToProductionEnvironment)
 
-Import-Module .\StealFocus.Build.WindowsAzure.psm1 -DisableNameChecking
+Import-Module $currentDirectory\StealFocus.Build.WindowsAzure.psm1 -DisableNameChecking
 
 $managementCertificate = Get-ManagementCertificate -managementCertificateThumbprint $managementCertificateThumbprint
 $affinityGroup = Create-AffinityGroup -subscriptionId $subscriptionId -managementCertificate $managementCertificate -affinityGroupName $affinityGroupName -affinityGroupLabel $affinityGroupLabel -affinityGroupLocation $affinityGroupLocation

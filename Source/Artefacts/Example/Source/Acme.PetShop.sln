@@ -1,0 +1,115 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.PetShop", "Acme.PetShop\Acme.PetShop.csproj", "{C5CB3AFC-AD79-4763-89DF-826885D18898}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{90C0D8B9-9C62-46A8-B77C-23483B48FFD6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{C650E8C4-6B79-4729-B58F-FDAAC2DFF3AF}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\Acme.PetShop.Build.proj = Scripts\Acme.PetShop.Build.proj
+		Scripts\Acme.PetShop.Build.Project.Assembly.targets = Scripts\Acme.PetShop.Build.Project.Assembly.targets
+		Scripts\Acme.PetShop.Build.Project.CSharp.targets = Scripts\Acme.PetShop.Build.Project.CSharp.targets
+		Scripts\Acme.PetShop.Build.Project.targets = Scripts\Acme.PetShop.Build.Project.targets
+		Scripts\Acme.PetShop.Build.Project.VisualBasic.targets = Scripts\Acme.PetShop.Build.Project.VisualBasic.targets
+		Scripts\Acme.PetShop.targets = Scripts\Acme.PetShop.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.PetShop.Tests", "Acme.PetShop.Tests\Acme.PetShop.Tests.csproj", "{070ADC47-F8B8-4DCF-9809-A9ADEE965D43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1C1124A8-5D2F-4104-867F-8CD30BDF7C81}"
+	ProjectSection(SolutionItems) = preProject
+		Acme.PetShop.ruleset = Acme.PetShop.ruleset
+		Acme.PetShop.StrongNameKeyPair.snk = Acme.PetShop.StrongNameKeyPair.snk
+		Acme.PetShop.StrongNamePublicKey.snk = Acme.PetShop.StrongNamePublicKey.snk
+		Acme.PetShop.vsmdi = Acme.PetShop.vsmdi
+		AssemblyInfoCommon.g.cs = AssemblyInfoCommon.g.cs
+		FxCopCustomDictionary.xml = FxCopCustomDictionary.xml
+		Local.testsettings = Local.testsettings
+		Settings.StyleCop = Settings.StyleCop
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Acme.PetShop.Azure", "Acme.PetShop.Azure\Acme.PetShop.Azure.ccproj", "{21436909-1260-4E9C-934E-5B06EB73ECCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.PetShop.Web.UI", "Acme.PetShop.Web.UI\Acme.PetShop.Web.UI.csproj", "{77CB6C7A-D655-46AE-A797-E57F9D69BF05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.PetShop.Web.UI.Tests", "Acme.PetShop.Web.UI.Tests\Acme.PetShop.Web.UI.Tests.csproj", "{60C97BBF-891D-4DD5-BE2E-BB6503B001E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.PetShop.MyWorker", "Acme.PetShop.MyWorker\Acme.PetShop.MyWorker.csproj", "{4447BA62-496F-483B-B73D-D0724936B61A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.PetShop.SharePoint", "Acme.PetShop.SharePoint\Acme.PetShop.SharePoint.csproj", "{C435283C-B53C-4099-9743-DE765891FC92}"
+EndProject
+Project("{C8D11400-126E-41CD-887F-60BD40844F9E}") = "Acme.PetShop.Database", "Acme.PetShop.Database\Acme.PetShop.Database.dbproj", "{67CBC824-A49E-4E9B-A947-360F3DFE65C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.PetShop.Office2010.WordAddIn", "Acme.PetShop.Office2010.WordAddIn\Acme.PetShop.Office2010.WordAddIn.csproj", "{15670A6B-5DB6-4D85-AC63-FE4BE48A2C6C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommandFiles", "CommandFiles", "{8BFF1752-2B15-4DC0-98CE-3014B9E11500}"
+	ProjectSection(SolutionItems) = preProject
+		CommandFiles\Acme.PetShop.Build.cmd = CommandFiles\Acme.PetShop.Build.cmd
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.PetShop.Web.Services", "Acme.PetShop.Web.Services\Acme.PetShop.Web.Services.csproj", "{202A776F-72EA-470F-9940-3C1E512F3E69}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Acme.PetShop.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5CB3AFC-AD79-4763-89DF-826885D18898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5CB3AFC-AD79-4763-89DF-826885D18898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5CB3AFC-AD79-4763-89DF-826885D18898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5CB3AFC-AD79-4763-89DF-826885D18898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{070ADC47-F8B8-4DCF-9809-A9ADEE965D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{070ADC47-F8B8-4DCF-9809-A9ADEE965D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{070ADC47-F8B8-4DCF-9809-A9ADEE965D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{070ADC47-F8B8-4DCF-9809-A9ADEE965D43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21436909-1260-4E9C-934E-5B06EB73ECCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21436909-1260-4E9C-934E-5B06EB73ECCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21436909-1260-4E9C-934E-5B06EB73ECCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21436909-1260-4E9C-934E-5B06EB73ECCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77CB6C7A-D655-46AE-A797-E57F9D69BF05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77CB6C7A-D655-46AE-A797-E57F9D69BF05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77CB6C7A-D655-46AE-A797-E57F9D69BF05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77CB6C7A-D655-46AE-A797-E57F9D69BF05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60C97BBF-891D-4DD5-BE2E-BB6503B001E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60C97BBF-891D-4DD5-BE2E-BB6503B001E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60C97BBF-891D-4DD5-BE2E-BB6503B001E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60C97BBF-891D-4DD5-BE2E-BB6503B001E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4447BA62-496F-483B-B73D-D0724936B61A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4447BA62-496F-483B-B73D-D0724936B61A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4447BA62-496F-483B-B73D-D0724936B61A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4447BA62-496F-483B-B73D-D0724936B61A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C435283C-B53C-4099-9743-DE765891FC92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C435283C-B53C-4099-9743-DE765891FC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C435283C-B53C-4099-9743-DE765891FC92}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C435283C-B53C-4099-9743-DE765891FC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C435283C-B53C-4099-9743-DE765891FC92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C435283C-B53C-4099-9743-DE765891FC92}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{15670A6B-5DB6-4D85-AC63-FE4BE48A2C6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15670A6B-5DB6-4D85-AC63-FE4BE48A2C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15670A6B-5DB6-4D85-AC63-FE4BE48A2C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15670A6B-5DB6-4D85-AC63-FE4BE48A2C6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{202A776F-72EA-470F-9940-3C1E512F3E69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{202A776F-72EA-470F-9940-3C1E512F3E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{202A776F-72EA-470F-9940-3C1E512F3E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{202A776F-72EA-470F-9940-3C1E512F3E69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{070ADC47-F8B8-4DCF-9809-A9ADEE965D43} = {90C0D8B9-9C62-46A8-B77C-23483B48FFD6}
+		{60C97BBF-891D-4DD5-BE2E-BB6503B001E3} = {90C0D8B9-9C62-46A8-B77C-23483B48FFD6}
+	EndGlobalSection
+EndGlobal

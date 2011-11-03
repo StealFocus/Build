@@ -9,9 +9,40 @@ To Do
  - Install TFS to 14
  - Test for whitespace in path
  - Add generic scripts to create NuGet package.
+ - Add in a "Drop" folder next to the "Build" folder to allow "CoreDropBuild" to run.
+ - Rationalise "RequiredBranchName" for "MSDeployAction" and "AzurePublishAction" (NB - "DeployForTest")
+ - There will be a problem if an Azure Role (strongly named) references a class library which is delay signed.
+ - Project configuration check for MSDeploy?
+ - Project configuration check for Database projects (see below)?
+ - Add "Full Build" with ForceInitaliseEnvironment
+ - Fix <Exec Condition=" '$(InstallNuGetPackages)'=='true' " Command="%22$(NuGetDotExePath)%22 install %22%(NuGetPackage.FullPath)%22" /> issue by using same approach as PowerShell.
+ - Not re-generating AssemblyInfoCommon for "Release" build (should be as the Configuration is written in the file).
+ - Disallow delay signed Azure Roles
+ - Seems to be re-compiling between cmd line builds.
+
+Database
+========
+Common
+ - <IncludeSchemaNameInFileName>False</IncludeSchemaNameInFileName>
+Release
+ - <TargetConnectionString>Data Source=.;Integrated Security=True;Pooling=False</TargetConnectionString>
+ - <TargetDatabase>Acme.PetShop</TargetDatabase>
+ - <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+ - <DeployToDatabase>True</DeployToDatabase>
+Debug
+ - <TargetConnectionString>Data Source=.;Integrated Security=True;Pooling=False</TargetConnectionString>
+ - <TargetDatabase>Acme.PetShop</TargetDatabase>
+ - <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+ - <DeployToDatabase>True</DeployToDatabase>
+ - <RunCodeAnalysis>True</RunCodeAnalysis>
+ - <CodeAnalysisRules>+!Microsoft.Rules.Data.SR0014;+!Microsoft.Rules.Data.SR0008;+!Microsoft.Rules.Data.SR0010;+!Microsoft.Rules.Data.SR0013;+!Microsoft.Rules.Data.SR0001;+!Microsoft.Rules.Data.SR0009;+!Microsoft.Rules.Data.SR0012;+!Microsoft.Rules.Data.SR0011;+!Microsoft.Rules.Data.SR0016;+!Microsoft.Rules.Data.SR0015;+!Microsoft.Rules.Data.SR0005;+!Microsoft.Rules.Data.SR0006;+!Microsoft.Rules.Data.SR0004;+!Microsoft.Rules.Data.SR0007</CodeAnalysisRules>
+  
 
 C:\Workspaces\Temp\Acme.MSBuildTest\Trunk\Source\Scripts
 %SystemDrive%\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe Acme.PetShop.Build.proj /t:PublishAzurePackages /p:DeployForTest=false
+
+C:\Workspaces\GitHub\StealFocus\Build\Source\Artefacts\Example\Source\Scripts
+"%windir%\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe" /t:PublishAzurePackages /p:DeployForTest=false
 
 msbuild Acme.PetShop.Build.proj /p:ForceInitialiseEnvironment=true;DeleteBuildDirectory=true;DeleteMSTestResultsDirectory=true
 

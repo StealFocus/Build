@@ -212,7 +212,7 @@
     <!-- To Do: determine "-azurePublishActionRequired" argument dynamically. -->
     <Exec
       Condition=" !Exists('$(StateFilePath)') "
-      Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File .\StealFocus.Build.ValidatePrerequisites.ps1 -azurePublishActionRequired true"
+      Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File $(MSBuildThisFileDirectory)\StealFocus.Build.ValidatePrerequisites.ps1 -currentDirectory $(MSBuildThisFileDirectory) -azurePublishActionRequired true"
       WorkingDirectory="." />
     <Message
       Importance="high"
@@ -705,12 +705,15 @@
       <IsAzureProject>true</IsAzureProject>
     </PropertyGroup>
     <!-- Only test for Azure Role project if we are able to skip it. -->
+    <!--
+    /def:Project/def:ItemGroup/def:Reference[substring(@Include, 1, 22) = 'Microsoft.WindowsAzure']/..
+    -->
     <MSBuild.ExtensionPack.Xml.XmlFile
       Condition=" '$(AzureRoleCheckedXPath)'=='false' Or ( '$(AzureRoleCheckedXPath)'=='true' And '$(DefaultCheck)'=='false' ) "
       TaskAction="ReadElementXml"
       File="$(FullPath)"
       Namespaces="@(XmlNamespace)"
-      XPath="/def:Project/def:ItemGroup/def:Reference[substring(@Include, 1, 22) = 'Microsoft.WindowsAzure']/..">
+      XPath="/def:Project/def:ItemGroup/def:Compile[@Include = 'WebRole.cs' or @Include = 'WorkerRole.cs']/..">
       <Output
         TaskParameter="Value"
         PropertyName="WindowsAzureReferenceElementContent"/>

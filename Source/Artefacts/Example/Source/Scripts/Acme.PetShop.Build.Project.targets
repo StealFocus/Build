@@ -10,6 +10,6 @@
     IMPORTANT - you must import these targets for the build scripts to function.
   -->
   <Import Project="Acme.PetShop.targets" />
-  <Import Project="StealFocus.Build.Project.targets" />
+  <Import Project="..\..\..\..\Artefacts\Scripts\StealFocus.Build.Project.targets" />
 
 </Project>

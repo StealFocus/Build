@@ -159,11 +159,20 @@ function Create-Deployment
 
 	if ($promoteToProductionEnvironment -and $removeStagingEnvironmentAfterwards)
 	{
-		Write-Host "Suspending Staging Environment Deployment (""PromoteToProductionEnvironment"" specified as true and ""RemoveStagingEnvironmentAfterwards"" specified as true)"
-		$hostedService | Get-Deployment -Slot Staging | Set-DeploymentStatus Suspended | Get-OperationStatus -WaitToComplete
-		Write-Host "`n"
-		Write-Host "Deleting Staging Environment Deployment (""PromoteToProductionEnvironment"" specified as true and ""RemoveStagingEnvironmentAfterwards"" specified as true)"
-		$hostedService | Get-Deployment -Slot Staging | Remove-Deployment | Get-OperationStatus -WaitToComplete
-		Write-Host "`n"
+		$deployment = $hostedService | Get-Deployment -Slot Staging
+		if ($deployment.DeploymentId -eq $null)
+		{
+			Write-Host "Skipping suspending and deleting Staging Environment Deployment (""PromoteToProductionEnvironment"" specified as true and ""RemoveStagingEnvironmentAfterwards"" specified as true) as no Staging Environment Deployment existed"
+			Write-Host "`n"
+		}
+		else
+		{
+			Write-Host "Suspending Staging Environment Deployment (""PromoteToProductionEnvironment"" specified as true and ""RemoveStagingEnvironmentAfterwards"" specified as true)"
+			$deployment | Set-DeploymentStatus Suspended | Get-OperationStatus -WaitToComplete
+			Write-Host "`n"
+			Write-Host "Deleting Staging Environment Deployment (""PromoteToProductionEnvironment"" specified as true and ""RemoveStagingEnvironmentAfterwards"" specified as true)"
+			$deployment | Remove-Deployment | Get-OperationStatus -WaitToComplete
+			Write-Host "`n"
+		}
 	}
 }

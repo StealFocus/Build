@@ -9,8 +9,6 @@ To Do
  - Install TFS to 14
  - Test for whitespace in path
  - Add generic scripts to create NuGet package.
- - Add in a "Drop" folder next to the "Build" folder to allow "CoreDropBuild" to run.
- - Rationalise "RequiredBranchName" for "MSDeployAction" and "AzurePublishAction" (NB - "DeployForTest")
  - There will be a problem if an Azure Role (strongly named) references a class library which is delay signed.
  - Project configuration check for MSDeploy?
  - Project configuration check for Database projects (see below)?
@@ -18,7 +16,8 @@ To Do
  - Fix <Exec Condition=" '$(InstallNuGetPackages)'=='true' " Command="%22$(NuGetDotExePath)%22 install %22%(NuGetPackage.FullPath)%22" /> issue by using same approach as PowerShell.
  - Not re-generating AssemblyInfoCommon for "Release" build (should be as the Configuration is written in the file).
  - Disallow delay signed Azure Roles
- - Seems to be re-compiling between cmd line builds.
+ - Seems to be re-compiling between cmd line builds?
+ - MSBuild - build in parrellel? Locks on AssemblyInfoCommon.g.cs
 
 Database
 ========

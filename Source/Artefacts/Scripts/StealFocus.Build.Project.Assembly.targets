@@ -79,7 +79,7 @@
       File="$(AssemblyInfoCommonFilePath)" >
       <Output
         TaskParameter="Lines"
-        ItemName="ItemsFromFile"/>
+        ItemName="ItemsFromFile" />
     </ReadLinesFromFile>
     <CreateProperty
       Condition=" '$([System.Text.RegularExpressions.Regex]::Match(%(ItemsFromFile.Identity), `\[assembly: AssemblyConfiguration\(&quot;$(BuildLabel) $(Configuration)&quot;\)\]`))'!='' "

@@ -16,10 +16,14 @@
       Condition=" '$(AzureManagementCertificateThumbprint)'=='' "
       Text="Please supply 'AzureManagementCertificateThumbprint' property." />
     <Error
-      Condition=" '$(DeployForTest)'=='' "
-      Text="Please supply a 'DeployForTest' property." />
+      Condition=" '$(DeployForTestStage)'=='' "
+      Text="Please supply a 'DeployForTestStage' property." />
     <Exec
-      Condition=" '%(AzurePublishAction.DeployForTest)'=='$(DeployForTest)' "
+      Condition=" '%(AzurePublishAction.DeployForTest)'=='true' And '$(DeployForTestStage)'=='true' "
+      Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File $(MSBuildThisFileDirectory)\StealFocus.Build.WindowsAzure.PublishAzurePackages.ps1 -currentDirectory $(MSBuildThisFileDirectory) -subscriptionId %22$(AzureSubscriptionId)%22 -managementCertificateThumbprint %22$(AzureManagementCertificateThumbprint)%22 -affinityGroupName %22%(AzurePublishAction.AffinityGroupName)%22 -affinityGroupLabel %22%(AzurePublishAction.AffinityGroupLabel)%22 -affinityGroupLocation %22%(AzurePublishAction.AffinityGroupLocation)%22 -hostedServiceName %22%(AzurePublishAction.HostedServiceName)%22 -hostedServiceLabel %22%(AzurePublishAction.HostedServiceLabel)%22 -storageAccountName %22%(AzurePublishAction.StorageAccountName)%22 -storageAccountLabel %22%(AzurePublishAction.StorageAccountLabel)%22 -packageFilePath %22%(AzurePublishAction.PackageFilePath)%22 -configurationFilePath %22%(AzurePublishAction.ConfigurationFilePath)%22 -deploymentLabel %22%(AzurePublishAction.DeploymentLabel)%22 -removeStagingEnvironmentAfterwards %(AzurePublishAction.RemoveStagingEnvironmentAfterwards) -promoteToProductionEnvironment %(AzurePublishAction.PromoteToProductionEnvironment)"
+      WorkingDirectory="." />
+    <Exec
+      Condition=" '%(AzurePublishAction.RequiredBranchName)'=='$(BranchName)' And '$(DeployForTestStage)'=='false' "
       Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File $(MSBuildThisFileDirectory)\StealFocus.Build.WindowsAzure.PublishAzurePackages.ps1 -currentDirectory $(MSBuildThisFileDirectory) -subscriptionId %22$(AzureSubscriptionId)%22 -managementCertificateThumbprint %22$(AzureManagementCertificateThumbprint)%22 -affinityGroupName %22%(AzurePublishAction.AffinityGroupName)%22 -affinityGroupLabel %22%(AzurePublishAction.AffinityGroupLabel)%22 -affinityGroupLocation %22%(AzurePublishAction.AffinityGroupLocation)%22 -hostedServiceName %22%(AzurePublishAction.HostedServiceName)%22 -hostedServiceLabel %22%(AzurePublishAction.HostedServiceLabel)%22 -storageAccountName %22%(AzurePublishAction.StorageAccountName)%22 -storageAccountLabel %22%(AzurePublishAction.StorageAccountLabel)%22 -packageFilePath %22%(AzurePublishAction.PackageFilePath)%22 -configurationFilePath %22%(AzurePublishAction.ConfigurationFilePath)%22 -deploymentLabel %22%(AzurePublishAction.DeploymentLabel)%22 -removeStagingEnvironmentAfterwards %(AzurePublishAction.RemoveStagingEnvironmentAfterwards) -promoteToProductionEnvironment %(AzurePublishAction.PromoteToProductionEnvironment)"
       WorkingDirectory="." />
   </Target>

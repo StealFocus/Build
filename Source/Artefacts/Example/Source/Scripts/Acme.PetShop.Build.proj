@@ -273,8 +273,10 @@
       <DeploymentLabel>Acme.PetShop v$(VersionNumber)</DeploymentLabel>
       <RemoveStagingEnvironmentAfterwards>true</RemoveStagingEnvironmentAfterwards>
       <PromoteToProductionEnvironment>true</PromoteToProductionEnvironment>
-      <!-- Set "DeployForTest" to true to have the application deployed during the "DeployForTest" stage of the build. -->
+      <!-- Set "DeployForTest" to true to have the Azure application deployed during the "DeployForTest" stage of the build. -->
       <DeployForTest>false</DeployForTest>
+      <!-- Set "RequiredBranchName" to have the Azure application deployed during the "EnvironmentDeploy" stage of the build. -->
+      <RequiredBranchName>Trunk</RequiredBranchName>
     </AzurePublishAction>
   </ItemGroup>
   

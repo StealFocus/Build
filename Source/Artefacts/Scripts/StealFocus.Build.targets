@@ -47,6 +47,18 @@
     <BuildDirectoryPath>$(SolutionDirectoryPath)\..\Build</BuildDirectoryPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" ''=='' ">
+    <DropLocationForBuild>$(SolutionDirectoryPath)\..\Drop</DropLocationForBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(IsDesktopBuild)'=='true' And '$(PopulateDropLocationForBuild)'=='' ">
+    <PopulateDropLocationForBuild>false</PopulateDropLocationForBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(IsDesktopBuild)'!='true' And '$(PopulateDropLocationForBuild)'=='' ">
+    <PopulateDropLocationForBuild>true</PopulateDropLocationForBuild>
+  </PropertyGroup>
+
   <PropertyGroup Condition=" '$(MSTestResultsDirectoryPath)' == '' ">
     <MSTestResultsDirectoryPath>$(SolutionDirectoryPath)\TestResults</MSTestResultsDirectoryPath>
   </PropertyGroup>
@@ -223,9 +235,6 @@
     <Message
       Importance="high"
       Text="Validating properties..." />
-    <Error
-      Condition=" '$(IsDesktopBuild)'!='true' And '$(DropLocationForBuild)'=='' "
-      Text="For non-desktop builds, you must supply a property called 'DropLocationForBuild'." />
     <Error
       Condition=" !Exists('$(SdkBinPath)') "
       Text="The value set for the SDK Bin Path ('$(SdkBinPath)') did not exist." />
@@ -1021,7 +1030,7 @@
     <MSBuild
       Projects="$(MSBuildProjectFile)"
       Targets="PublishAzurePackages"
-      Properties="DeployForTest=true" />
+      Properties="DeployForTestStage=true" />
   </Target>
 
   <Target Name="AfterDeployForTestCustom">
@@ -1107,13 +1116,22 @@
     <!-- To be overridden in inheriting script. -->
   </Target>
 
-  <Target Name="CoreDropBuild">
+  <Target Name="CoreDropBuild" Condition=" '$(PopulateDropLocationForBuild)'=='true' ">
+    <!-- 
+      If the drop location already exists, delete it as we don't want to mix up the new artefacts with old ones. 
+      The supplied 'DropLocationForBuild' property should be unique for each build.
+    -->
+    <Warning
+      Condition=" Exists('$(DropLocationForBuild)') "
+      Text="Deleting the drop location '$(DropLocationForBuild)' as it was found to exist." />
+    <RemoveDir
+      Condition=" Exists('$(DropLocationForBuild)') "
+      Directories="$(DropLocationForBuild)" />
     <!-- Copy Build directory contents to drop location. -->
     <ItemGroup>
       <BuildDirectoryFilesToCopy Include="$(BuildDirectoryPath)\**\*.*" />
     </ItemGroup>
     <Copy
-      Condition=" '$(IsDesktopBuild)'!='true' "
       SourceFiles="@(BuildDirectoryFilesToCopy)"
       DestinationFiles="@(BuildDirectoryFilesToCopy->'$(DropLocationForBuild)\%(RecursiveDir)%(Filename)%(Extension)')" />
     <!-- Copy TestResults directory contents to drop location. -->
@@ -1121,7 +1139,6 @@
       <MSTestResultsDirectoryFilesToCopy Include="$(MSTestResultsDirectoryPath)\**\*.*" />
     </ItemGroup>
     <Copy
-      Condition=" '$(IsDesktopBuild)'!='true' "
       SourceFiles="@(MSTestResultsDirectoryFilesToCopy)"
       DestinationFiles="@(MSTestResultsDirectoryFilesToCopy->'$(DropLocationForBuild)\TestResults\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
@@ -1141,7 +1158,7 @@
     <MSBuild
       Projects="$(MSBuildProjectFile)"
       Targets="PublishAzurePackages" 
-      Properties="DeployForTest=false" />
+      Properties="DeployForTestStage=false" />
   </Target>
 
   <Target Name="AfterEnvironmentDeployCustom">

@@ -58,6 +58,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Notes.txt = Notes.txt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommandFiles", "CommandFiles", "{9C246013-472C-4AD3-AE3A-37D60BFE501D}"
+	ProjectSection(SolutionItems) = preProject
+		Artefacts\Example\Source\CommandFiles\Acme.PetShop.Build.cmd = Artefacts\Example\Source\CommandFiles\Acme.PetShop.Build.cmd
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +74,6 @@ Global
 		{06414272-9F58-4992-8715-7557B65067D5} = {C05C9738-60B2-462D-8E03-0F3611296AC9}
 		{3F74F62B-55DD-4DD8-B523-51D350DD2D5E} = {A858E3FC-FB16-439E-AA0C-3DF944FE7181}
 		{061734E7-FFBD-4131-80BE-E0BABB834480} = {3F74F62B-55DD-4DD8-B523-51D350DD2D5E}
+		{9C246013-472C-4AD3-AE3A-37D60BFE501D} = {3F74F62B-55DD-4DD8-B523-51D350DD2D5E}
 	EndGlobalSection
 EndGlobal

@@ -12,7 +12,7 @@ ECHO.
 ) ELSE (
 	IF /i %buildChoice% == q (
 	ECHO.
-	%windir%\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe ..\Scripts\Acme.PetShop.Build.proj /p:BuildReleaseConfiguration=false /consoleloggerparameters:Verbosity=minimal /fileLogger /fileLoggerParameters:LogFile=SolutionBuild.msbuild.log;verbosity=diagnostic
+	%windir%\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe ..\Scripts\Acme.PetShop.Build.proj /p:BuildReleaseConfiguration=false;PopulateDropLocationForBuild=false /consoleloggerparameters:Verbosity=minimal /fileLogger /fileLoggerParameters:LogFile=SolutionBuild.msbuild.log;verbosity=diagnostic
 	) ELSE (
 		ECHO.
 		ECHO Invalid selection

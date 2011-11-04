@@ -261,13 +261,13 @@
   
   <ItemGroup>
     <AzurePublishAction Include="Acme.PetShop.Azure">
-      <AffinityGroupName>BeazleyNorthEuropeSys</AffinityGroupName>
-      <AffinityGroupLabel>Beazley - North Europe - System Test</AffinityGroupLabel>
-      <AffinityGroupLocation>North Europe</AffinityGroupLocation>
-      <HostedServiceName>BzyTasks-NEur-Sys</HostedServiceName>
-      <HostedServiceLabel>Beazley.Tasks - North Europe - System Test</HostedServiceLabel>
-      <StorageAccountName>bzytasksneursys</StorageAccountName>
-      <StorageAccountLabel>Beazley.Tasks - North Europe - System Test</StorageAccountLabel>
+      <AffinityGroupName>BeazleyWestEuropeSys</AffinityGroupName>
+      <AffinityGroupLabel>Beazley - West Europe - System Test</AffinityGroupLabel>
+      <AffinityGroupLocation>West Europe</AffinityGroupLocation>
+      <HostedServiceName>BzyTasks-WEur-Sys</HostedServiceName>
+      <HostedServiceLabel>Beazley.Tasks - West Europe - System Test</HostedServiceLabel>
+      <StorageAccountName>bzytasksweursys</StorageAccountName>
+      <StorageAccountLabel>Beazley.Tasks - West Europe - System Test</StorageAccountLabel>
       <PackageFilePath>$(BuildDirectoryPath)\Debug\_PublishedAzureProjects\Cloud\Acme.PetShop.Azure.cspkg</PackageFilePath>
       <ConfigurationFilePath>$(BuildDirectoryPath)\Debug\_PublishedAzureProjects\Cloud\ServiceConfiguration.Cloud.cscfg</ConfigurationFilePath>
       <DeploymentLabel>Acme.PetShop v$(VersionNumber)</DeploymentLabel>

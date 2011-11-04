@@ -17,5 +17,6 @@
         </DataCollector>
       </DataCollectors>
     </AgentRule>
+    <ExecutionThread apartmentState="MTA" />
   </Execution>
 </TestSettings>

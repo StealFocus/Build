@@ -58,9 +58,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyInfoCommon.g.cs">
-      <Link>Properties\AssemblyInfoCommon.g.cs</Link>
-    </Compile>
+    <Compile Include="Properties\AssemblyInfoCommon.g.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTest1.cs" />

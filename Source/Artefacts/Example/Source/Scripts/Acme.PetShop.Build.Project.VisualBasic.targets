@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <AssemblyInfoCommonFileName>AssemblyInfoCommon.g.vb</AssemblyInfoCommonFileName>
-    <AssemblyInfoCommonFilePath>$(SolutionDirectoryPath)\$(AssemblyInfoCommonFileName)</AssemblyInfoCommonFilePath>
+    <AssemblyInfoCommonFilePath>$(MSBuildProjectDirectory)\$(AssemblyInfoCommonFileName)</AssemblyInfoCommonFilePath>
   </PropertyGroup>
 
   <ItemGroup>

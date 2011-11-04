@@ -33,6 +33,10 @@
     <InstallNuGetPackages>false</InstallNuGetPackages>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(MaxBuildTimeInMinutes)'=='' ">
+    <MaxBuildTimeInMinutes>10</MaxBuildTimeInMinutes>
+  </PropertyGroup>
+
   <PropertyGroup>
     <CleanupAzureFilesInOutputDirectory>true</CleanupAzureFilesInOutputDirectory>
     <DeleteBuildDirectory>false</DeleteBuildDirectory>
@@ -40,6 +44,7 @@
     <ForceInitialiseEnvironment>false</ForceInitialiseEnvironment>
     <IsInitialiseEnvironmentBuild>true</IsInitialiseEnvironmentBuild>
     <IsEnvironmentDeployBuild>true</IsEnvironmentDeployBuild>
+    <StartTimeStamp>$([System.DateTime]::Now)</StartTimeStamp>
     <StateFilePath>.\StealFocus.Build.state</StateFilePath>
   </PropertyGroup>
 
@@ -167,7 +172,8 @@
       $(PackageDependsOn);
       $(BuildDocumentationDependsOn);
       $(DropBuildDependsOn);
-      $(EnvironmentDeployDependsOn)
+      $(EnvironmentDeployDependsOn);
+      End
     </BuildDependsOn>
   </PropertyGroup>
 
@@ -1165,6 +1171,57 @@
     <!-- To be overridden in inheriting script. -->
   </Target>
 
+  <Target Name="End">
+    <PropertyGroup>
+      <EndTimeStamp>$([System.DateTime]::Now)</EndTimeStamp>
+    </PropertyGroup>
+    <Message
+      Importance="high"
+      Text="Build start time stamp: $(StartTimeStamp)" />
+    <Message
+      Importance="high"
+      Text="Build end time stamp: $(EndTimeStamp)" />
+    <MSBuild.ExtensionPack.Framework.DateAndTime
+      TaskAction="GetElapsed"
+      Start="$(StartTimeStamp)"
+      End="$(EndTimeStamp)"
+      Format="MilliSeconds">
+      <Output
+        TaskParameter="Result"
+        PropertyName="BuildTimeInMilliSeconds" />
+    </MSBuild.ExtensionPack.Framework.DateAndTime>
+    <MSBuild.ExtensionPack.Science.Maths
+      TaskAction="Multiply"
+      Numbers="$(MaxBuildTimeInMinutes);60;1000">
+      <Output
+        TaskParameter="Result"
+        PropertyName="MaxBuildTimeInMilliSeconds" />
+    </MSBuild.ExtensionPack.Science.Maths>
+    <MSBuild.ExtensionPack.Science.Maths
+      TaskAction="Compare"
+      P1="$(BuildTimeInMilliSeconds)"
+      P2="$(MaxBuildTimeInMilliSeconds)"
+      Comparison="GreaterThan">
+      <Output
+        TaskParameter="LogicalResult"
+        PropertyName="BuildOverran" />
+    </MSBuild.ExtensionPack.Science.Maths>
+    <MSBuild.ExtensionPack.Science.Maths
+      TaskAction="Evaluate"
+      Expression="$(BuildTimeInMilliSeconds) / 60 / 1000">
+      <Output
+        TaskParameter="Result"
+        PropertyName="BuildTimeInMinutes" />
+    </MSBuild.ExtensionPack.Science.Maths>
+    <Message
+      Condition=" '$(BuildOverran)'!='True' "
+      Importance="high" 
+      Text="The build took $(BuildTimeInMinutes) minutes." />
+    <Error 
+      Condition=" '$(BuildOverran)'=='True' " 
+      Text="The build took $(BuildTimeInMinutes) minutes which is longer than the configured allowed length of $(MaxBuildTimeInMinutes) minute(s)." />
+  </Target>
+  
   <Target Name="Build" DependsOnTargets="$(BuildDependsOn)" />
 
 </Project>

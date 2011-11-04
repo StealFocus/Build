@@ -75,9 +75,7 @@
     <Content Include="Service1.svc" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyInfoCommon.g.cs">
-      <Link>Properties\AssemblyInfoCommon.g.cs</Link>
-    </Compile>
+    <Compile Include="Properties\AssemblyInfoCommon.g.cs" />
     <Compile Include="AzureLocalStorageTraceListener.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Service1.svc.cs">

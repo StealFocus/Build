@@ -6,5 +6,6 @@
     <TestTypeSpecific />
     <AgentRule name="Execution Agents">
     </AgentRule>
+    <ExecutionThread apartmentState="MTA" />
   </Execution>
 </TestSettings>

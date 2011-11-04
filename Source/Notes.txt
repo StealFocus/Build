@@ -17,7 +17,6 @@ To Do
  - Not re-generating AssemblyInfoCommon for "Release" build (should be as the Configuration is written in the file).
  - Disallow delay signed Azure Roles
  - Seems to be re-compiling between cmd line builds?
- - MSBuild - build in parrellel? Locks on AssemblyInfoCommon.g.cs
 
 Database
 ========

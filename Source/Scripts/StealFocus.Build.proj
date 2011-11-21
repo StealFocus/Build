@@ -15,9 +15,12 @@
     <Exec
       Command="..\..\..\..\Tools\NuGet\NuGet.exe pack StealFocus.Build.nuspec -Version $(VersionNumber)"
       WorkingDirectory="..\Artefacts\NuGet\StealFocus.Build" />
+    <ItemGroup Condition=" '$(IsDesktopBuild)'!='true' ">
+      <NuGetPackages Include="..\Artefacts\NuGet\StealFocus.Build\*.nupkg" />
+    </ItemGroup>
     <Copy
       Condition=" '$(IsDesktopBuild)'!='true' "
-      SourceFiles="..\Artefacts\NuGet\StealFocus.Build\*.nupkg"
+      SourceFiles="@(NuGetPackages)"
       DestinationFolder="$(DropLocationForBuild)" />
   </Target>
 

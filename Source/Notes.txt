@@ -17,6 +17,15 @@ To Do
  - Not re-generating AssemblyInfoCommon for "Release" build (should be as the Configuration is written in the file).
  - Disallow delay signed Azure Roles
  - Seems to be re-compiling between cmd line builds?
+ - Report times for each stage of build and summarise at the end.
+ - Put IIS version etc in TFS Build definition (do not require, allow defaults)
+ - Check for usage of IIS in web project files.
+ - Improve error message when missing import is detected in csproj files.
+ - Project checking allows DelaySigned switch to be applied to Azure Role projects.
+ - Test properties are listed twice.
+ - Script is trying to do StyleCop targets fix but StyleCop is not installed.
+ - Check of Azure Cmdlets not causing a TFS Build error.
+ - (?) Write something to parse TFS logs looking for unexpected instances of "\csc.exe" (?)
 
 Database
 ========
@@ -54,6 +63,36 @@ CommandFiles
  - Initialisation build (Full build?)
  - Normal build
  - Quick build
+
+Stages
+======
+ - InitialiseBuild
+ - InitialiseEnvironment
+ - CodeGeneration
+ - xxxx SolutionCompile
+ - DeployForTest ?????????????? Configuration, BuildDirectoryPath
+ - xxxx RunTests
+ - Package - OK
+ - BuildDocumentation - OK
+ - xxxx DropBuild - MSTestResultsDirectoryPath, BuildDirectoryPath, DropLocationForBuild
+ - EnvironmentDeploy - BuildDirectoryPath
+
+ - CheckProjectConfigurations
+ - On Compile - DelaySign=false;AssemblyOriginatorKeyFile=$(StrongNameKeyPairPath)
+ - CorePackageWebProjectsForConfiguration, CorePackageSharePointProjectsForConfiguration, CorePublishAzureProjectsForConfiguration 
+	- Configuration = Debug
+	- OutputPath = $(BuildDirectoryPath)\Debug
+	- 
+
+TFS 2010 - Arguments
+====================
+ - Build location
+ - Drop location
+ - Version Number (add to standard MSBuild call to build solution)
+
+ IsDesktopBuild, BuildDirectoryPath, DropLocationForBuild, MSTestResultsDirectoryPath, SolutionDirectoryPath
+
+ BuildLabel, BuildLabelNumber, VersionNumber
 
 TFS 2010 - DefaultTemplate.xaml
 ===============================

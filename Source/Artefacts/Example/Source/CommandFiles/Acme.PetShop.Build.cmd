@@ -1,8 +1,8 @@
 @ECHO OFF
 ECHO Please select a build type to run.
 ECHO.
-ECHO - Full build (Debug and Release configurations)
-ECHO - Quick build (Debug configuration only)
+ECHO - Full build (f) - Debug and Release configurations
+ECHO - Quick build (q) - Debug configuration only
 ECHO.
 :question
 SET /p buildChoice=Please enter F (for Full build) or Q (for Quick build): 

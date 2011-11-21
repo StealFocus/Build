@@ -44,7 +44,7 @@
     <ForceInitialiseEnvironment>false</ForceInitialiseEnvironment>
     <IsInitialiseEnvironmentBuild>true</IsInitialiseEnvironmentBuild>
     <IsEnvironmentDeployBuild>true</IsEnvironmentDeployBuild>
-    <StartTimeStamp>$([System.DateTime]::Now)</StartTimeStamp>
+    <StartTimeStamp>$([System.DateTime]::Now.ToString("yyyy/MM/dd HH:mm:ss"))</StartTimeStamp>
     <StateFilePath>.\StealFocus.Build.state</StateFilePath>
   </PropertyGroup>
 
@@ -52,7 +52,7 @@
     <BuildDirectoryPath>$(SolutionDirectoryPath)\..\Build</BuildDirectoryPath>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" ''=='' ">
+  <PropertyGroup Condition=" '$(DropLocationForBuild)'=='' ">
     <DropLocationForBuild>$(SolutionDirectoryPath)\..\Drop</DropLocationForBuild>
   </PropertyGroup>
 
@@ -419,6 +419,8 @@
     <!-- To be overridden in inheriting script. -->
   </Target>
 
+  <Target Name="InitialiseBuild" DependsOnTargets="$(InitialiseBuildDependsOn)" />
+
   <!-- Initialise Environment -->
 
   <Target Name="BeforeInitialiseEnvironmentCustom">
@@ -487,6 +489,8 @@
   <Target Name="AfterInitialiseEnvironmentCustom">
     <!-- To be overridden in inheriting script. -->
   </Target>
+
+  <Target Name="InitialiseEnvironment" DependsOnTargets="$(InitialiseEnvironmentDependsOn)" />
   
   <!-- Code Generation -->
 
@@ -499,6 +503,8 @@
   <Target Name="AfterCodeGenerationCustom">
     <!-- To be overridden in inheriting script. -->
   </Target>
+
+  <Target Name="CodeGeneration" DependsOnTargets="$(CodeGenerationDependsOn)" />
   
   <!-- Solution Compile -->
 
@@ -1014,6 +1020,8 @@
     <!-- To be overridden in inheriting script. -->
   </Target>
 
+  <Target Name="SolutionCompile" DependsOnTargets="$(SolutionCompileDependsOn)" />
+
   <!-- Deploy For Test -->
 
   <Target Name="BeforeDeployForTestCustom">
@@ -1042,6 +1050,8 @@
   <Target Name="AfterDeployForTestCustom">
     <!-- To be overridden in inheriting script. -->
   </Target>
+
+  <Target Name="DeployForTest" DependsOnTargets="$(DeployForTestDependsOn)" />
   
   <!-- Run Tests -->
 
@@ -1092,6 +1102,8 @@
     <!-- To be overridden in inheriting script. -->
   </Target>
 
+  <Target Name="RunTests" DependsOnTargets="$(RunTestsDependsOn)" />
+
   <!-- Package -->
 
   <Target Name="BeforePackageCustom">
@@ -1103,6 +1115,8 @@
   <Target Name="AfterPackageCustom">
     <!-- To be overridden in inheriting script. -->
   </Target>
+
+  <Target Name="Package" DependsOnTargets="$(PackageDependsOn)" />
   
   <!-- Build Documentation -->
 
@@ -1115,6 +1129,8 @@
   <Target Name="AfterBuildDocumentationCustom">
     <!-- To be overridden in inheriting script. -->
   </Target>
+
+  <Target Name="BuildDocumentation" DependsOnTargets="$(BuildDocumentationDependsOn)" />
 
   <!-- Drop Build -->
 
@@ -1152,6 +1168,8 @@
   <Target Name="AfterDropBuildCustom">
     <!-- To be overridden in inheriting script. -->
   </Target>
+
+  <Target Name="DropBuild" DependsOnTargets="$(DropBuildDependsOn)" />
   
   <!-- Environment Deploy -->
 
@@ -1173,7 +1191,7 @@
 
   <Target Name="End">
     <PropertyGroup>
-      <EndTimeStamp>$([System.DateTime]::Now)</EndTimeStamp>
+      <EndTimeStamp>$([System.DateTime]::Now.ToString("yyyy/MM/dd HH:mm:ss"))</EndTimeStamp>
     </PropertyGroup>
     <Message
       Importance="high"
@@ -1221,6 +1239,10 @@
       Condition=" '$(BuildOverran)'=='True' " 
       Text="The build took $(BuildTimeInMinutes) minutes which is longer than the configured allowed length of $(MaxBuildTimeInMinutes) minute(s)." />
   </Target>
+
+  <Target Name="EnvironmentDeploy" DependsOnTargets="$(EnvironmentDeployDependsOn)" />
+
+  <!-- Build -->
   
   <Target Name="Build" DependsOnTargets="$(BuildDependsOn)" />
 

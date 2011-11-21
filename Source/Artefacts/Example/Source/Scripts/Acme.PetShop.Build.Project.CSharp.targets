@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <AssemblyInfoCommonFileName>AssemblyInfoCommon.g.cs</AssemblyInfoCommonFileName>
-    <AssemblyInfoCommonFilePath>$(MSBuildProjectDirectory)\$(AssemblyInfoCommonFileName)</AssemblyInfoCommonFilePath>
+    <AssemblyInfoCommonFilePath>$(MSBuildProjectDirectory)\Properties\$(AssemblyInfoCommonFileName)</AssemblyInfoCommonFilePath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,7 +35,7 @@
     -->
     <!--
     <Exec
-      Condition=" '$(ProjectName)'=='Acme.Master.ServiceAgents' "
+      Condition=" '$(ProjectName)'=='Acme.PetShop.ServiceAgents' "
       Command='"$(SYSTEMDRIVE)\Program Files\Microsoft SDKs\Windows\v6.0A\Bin\svcutil.exe" .\ThirdPartyService\ThirdPartyService.wsdl /namespace:*,Acme.PetShop.ServiceAgents.ThirdPartyService /out:.\ThirdPartyService\ThirdPartyService.g.cs' />
     -->
   </Target>

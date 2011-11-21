@@ -17,8 +17,8 @@
       WorkingDirectory="..\Artefacts\NuGet\StealFocus.Build" />
     <Copy
       Condition=" '$(IsDesktopBuild)'!='true' "
-      SourceFiles="*.nupkg"
-      DestinationFolder="$(DropLocationForBuild)" ></Copy>
+      SourceFiles="..\Artefacts\NuGet\StealFocus.Build\*.nupkg"
+      DestinationFolder="$(DropLocationForBuild)" />
   </Target>
 
 </Project>

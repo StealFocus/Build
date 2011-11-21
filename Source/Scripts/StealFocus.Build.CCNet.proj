@@ -53,7 +53,7 @@
       Text="Using 'VersionNumber' = '$(VersionNumber)'." />
     <MSBuild
       Projects="StealFocus.Build.proj"
-      Properties="VersionNumber=$(VersionNumber)" />
+      Properties="DropLocationForBuild=$(DropLocationForBuild);IsDesktopBuild=false;VersionNumber=$(VersionNumber)" />
   </Target>
 
 </Project>

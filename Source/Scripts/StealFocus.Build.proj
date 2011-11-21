@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Default">
 
+  <PropertyGroup>
+    <IsDesktopBuild>true</IsDesktopBuild>
+  </PropertyGroup>
+  
   <Target Name="Default">
     <ItemGroup>
       <ScriptFiles Include="..\Artefacts\Scripts\*.*" />
@@ -11,6 +15,10 @@
     <Exec
       Command="..\..\..\..\Tools\NuGet\NuGet.exe pack StealFocus.Build.nuspec -Version $(VersionNumber)"
       WorkingDirectory="..\Artefacts\NuGet\StealFocus.Build" />
+    <Copy
+      Condition=" '$(IsDesktopBuild)'!='true' "
+      SourceFiles="*.nupkg"
+      DestinationFolder="$(DropLocationForBuild)" ></Copy>
   </Target>
 
 </Project>

@@ -26,6 +26,9 @@ To Do
  - Script is trying to do StyleCop targets fix but StyleCop is not installed.
  - Check of Azure Cmdlets not causing a TFS Build error.
  - (?) Write something to parse TFS logs looking for unexpected instances of "\csc.exe" (?)
+ x Script is insisting on Azure cert/sub id
+ - MSDeploy - need to use "Include IIS settings as configured in IIS" setting.
+ - For TFS2010 build, can we determine Build Number prefix from the name of the Team Build?
 
 Database
 ========

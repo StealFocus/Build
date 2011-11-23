@@ -29,6 +29,7 @@ To Do
  x Script is insisting on Azure cert/sub id
  - MSDeploy - need to use "Include IIS settings as configured in IIS" setting.
  - For TFS2010 build, can we determine Build Number prefix from the name of the Team Build?
+ - "Before" and "after" targets not being called in Team Build.
 
 Database
 ========

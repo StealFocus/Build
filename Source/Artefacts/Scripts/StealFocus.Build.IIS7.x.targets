@@ -38,12 +38,12 @@
     </MSBuild.ExtensionPack.Web.Iis7Website>
     <!-- Process all web sites (that exist) and are not called "Default Web Site". -->
     <MSBuild.ExtensionPack.Web.Iis7Website
-      Condition=" '$(WebSiteExists)'=='True' And '$(WebSiteName)'!='DefaultWebSiteName' "
+      Condition=" '$(WebSiteExists)'=='True' And '$(WebSiteName)'!='$(DefaultWebSiteName)' "
       TaskAction="Delete"
       Name="$(WebSiteName)"/>
     <!-- Process any web sites (that exists) called "Default Web Site" so long as 'ModifyDefaultWebSite' is true. -->
     <MSBuild.ExtensionPack.Web.Iis7Website
-      Condition=" '$(WebSiteExists)'=='True' And '$(WebSiteName)'=='DefaultWebSiteName' And '$(ModifyDefaultWebSite)'=='true'  "
+      Condition=" '$(WebSiteExists)'=='True' And '$(WebSiteName)'=='$(DefaultWebSiteName)' And '$(ModifyDefaultWebSite)'=='true'  "
       TaskAction="Delete"
       Name="$(WebSiteName)"/>
   </Target>
@@ -305,17 +305,29 @@
       Condition=" '%(WebApplication.Name)'=='' "
       Importance="high"
       Text="- (None configured)" />
-    <CreateItem
+    <!--<CreateItem
       Include="%(WebApplication.WebSiteName)">
       <Output
         TaskParameter="Include"
         ItemName="WebSite"/>
-    </CreateItem>
+    </CreateItem>-->
     <MSBuild
       Condition=" '%(WebSite.Name)'!='' "
       Projects="$(MSBuildProjectFile)"
       Targets="CreateWebApplication" 
       Properties="WebSiteName=%(WebSite.Name)" />
+    <CreateProperty
+      Condition=" '%(WebSite.Name)'=='$(DefaultWebSiteName)' "
+      Value="true">
+      <Output
+        TaskParameter="Value"
+        PropertyName="DefaultWebSiteFoundInWebSiteList" />
+    </CreateProperty>
+    <MSBuild
+      Condition=" '$(DefaultWebSiteFoundInWebSiteList)'!='true' "
+      Projects="$(MSBuildProjectFile)"
+      Targets="CreateWebApplication"
+      Properties="WebSiteName=$(DefaultWebSiteName)" />
   </Target>
 
   <Target Name="CreateWebApplicationManagedHandlerMappings">

@@ -30,6 +30,7 @@ To Do
  - MSDeploy - need to use "Include IIS settings as configured in IIS" setting.
  - For TFS2010 build, can we determine Build Number prefix from the name of the Team Build?
  - "Before" and "after" targets not being called in Team Build.
+ - Add in NuGet mechanism (include nuget.exe in package etc)
 
 Database
 ========

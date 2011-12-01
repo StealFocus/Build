@@ -258,16 +258,27 @@
   <PropertyGroup Condition=" '$(COMPUTERNAME)'=='UK01005' ">
     <AzureManagementCertificateThumbprint>194E98FC3435855FF3CFA6B4D3EA8273CAFF3ABA</AzureManagementCertificateThumbprint>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AzureAffinityGroup Include="BeazleyWestEuropeSys">
+      <Label>Beazley - West Europe - System Test</Label>
+      <Location>West Europe</Location>
+    </AzureAffinityGroup>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <AzureStorageAccount Include="bzytasksweurosys">
+      <AffinityGroupName>BeazleyWEuroSys</AffinityGroupName>
+      <Label>Beazley.Tasks - West Europe - System Test</Label>
+    </AzureStorageAccount>
+  </ItemGroup>
   
   <ItemGroup>
     <AzurePublishAction Include="Acme.PetShop.Azure">
-      <AffinityGroupName>BeazleyWestEuropeSys</AffinityGroupName>
-      <AffinityGroupLabel>Beazley - West Europe - System Test</AffinityGroupLabel>
-      <AffinityGroupLocation>West Europe</AffinityGroupLocation>
+      <AffinityGroupName>BeazleyWEuroSys</AffinityGroupName>
       <HostedServiceName>BzyTasks-WEur-Sys</HostedServiceName>
       <HostedServiceLabel>Beazley.Tasks - West Europe - System Test</HostedServiceLabel>
-      <StorageAccountName>bzytasksweursys</StorageAccountName>
-      <StorageAccountLabel>Beazley.Tasks - West Europe - System Test</StorageAccountLabel>
+      <StorageAccountName>bzytasksweurosys</StorageAccountName>
       <PackageFilePath>$(BuildDirectoryPath)\Debug\_PublishedAzureProjects\Cloud\Acme.PetShop.Azure.cspkg</PackageFilePath>
       <ConfigurationFilePath>$(BuildDirectoryPath)\Debug\_PublishedAzureProjects\Cloud\ServiceConfiguration.Cloud.cscfg</ConfigurationFilePath>
       <DeploymentLabel>Acme.PetShop v$(VersionNumber)</DeploymentLabel>

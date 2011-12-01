@@ -1043,6 +1043,14 @@
       Targets="Deploy" />
     <MSBuild
       Projects="$(MSBuildProjectFile)"
+      Targets="CreateAzureAffinityGroups"
+      Properties="DeployForTestStage=true" />
+    <MSBuild
+      Projects="$(MSBuildProjectFile)"
+      Targets="CreateAzureStorageAccounts"
+      Properties="DeployForTestStage=true" />
+    <MSBuild
+      Projects="$(MSBuildProjectFile)"
       Targets="PublishAzurePackages"
       Properties="DeployForTestStage=true" />
   </Target>
@@ -1179,6 +1187,14 @@
 
   <Target Name="CoreEnvironmentDeploy">
     <CallTarget Targets="MSDeploy" />
+    <MSBuild
+      Projects="$(MSBuildProjectFile)"
+      Targets="CreateAzureAffinityGroups"
+      Properties="DeployForTestStage=false" />
+    <MSBuild
+      Projects="$(MSBuildProjectFile)"
+      Targets="CreateAzureStorageAccounts"
+      Properties="DeployForTestStage=false" />
     <MSBuild
       Projects="$(MSBuildProjectFile)"
       Targets="PublishAzurePackages" 

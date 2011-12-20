@@ -6,7 +6,6 @@ To Do
  - Mobile version of Beazley tasks
  - Have a deployment build following the compile build
  - Split out azure sections of build script so we can run in a deployment build (msdeploy is already spilt so can called separately)
- - Install TFS to 14
  - Test for whitespace in path
  - Add generic scripts to create NuGet package.
  - There will be a problem if an Azure Role (strongly named) references a class library which is delay signed.
@@ -31,6 +30,9 @@ To Do
  - For TFS2010 build, can we determine Build Number prefix from the name of the Team Build?
  - "Before" and "after" targets not being called in Team Build.
  - Add in NuGet mechanism (include nuget.exe in package etc)
+ - Check security on IIS root site to see if it will work with Azure (NB - MSDN forum)
+ - Running "CreateAzureAffinityGroups" and "CreateAzureStorageAccounts" targets (after tests) on a desktop build.
+ - "AfterDropBuildCustom" and "BeforeDropBuildCustom" are being called on Desktop Builds.
 
 Database
 ========

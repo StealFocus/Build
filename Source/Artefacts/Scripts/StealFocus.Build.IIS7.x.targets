@@ -137,7 +137,7 @@
       Importance="high"
       Text="- (None configured)" />
     <MSBuild.ExtensionPack.Web.Iis7AppPool
-      Condition=" '%(WebApplicationPool.IdentityType)'=='SpecificUser' "
+      Condition=" '%(WebApplicationPool.Identity)'!='' And '%(WebApplicationPool.IdentityType)'=='SpecificUser' "
       TaskAction="Create"
       Name="%(WebApplicationPool.Identity)"
       IdentityType="%(WebApplicationPool.IdentityType)"
@@ -147,7 +147,7 @@
       Enable32BitAppOnWin64="%(WebApplicationPool.Enable32BitAppOnWin64)"
       PipelineMode="%(WebApplicationPool.PipelineMode)" />
     <MSBuild.ExtensionPack.Web.Iis7AppPool
-      Condition=" '%(WebApplicationPool.IdentityType)'!='SpecificUser' "
+      Condition=" '%(WebApplicationPool.Identity)'!='' And '%(WebApplicationPool.IdentityType)'!='SpecificUser' "
       TaskAction="Create"
       Name="%(WebApplicationPool.Identity)"
       IdentityType="%(WebApplicationPool.IdentityType)"

@@ -273,6 +273,9 @@
       Text="'BuildDirectoryPath' is '$(BuildDirectoryPath)'." />
     <Message
       Importance="high"
+      Text="'BuildName' is '$(BuildName)'." />
+    <Message
+      Importance="high"
       Text="'DeleteBuildDirectory' is '$(DeleteBuildDirectory)'." />
     <Message
       Importance="high"

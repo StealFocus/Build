@@ -20,13 +20,13 @@
         PropertyName="AzureAffinityGroups" />
     </CreateProperty>
     <Error
-      Condition=" '$(AzureAffinityGroups)'=='true' And '$(AzureSubscriptionId)'=='' "
+      Condition=" '$(AzureAffinityGroups)'=='true' And '%(AzureAffinityGroup.Identity)'!='' And '$(AzureSubscriptionId)'=='' "
       Text="Please supply 'AzureSubscriptionId' property." />
     <Error
-      Condition=" '$(AzureAffinityGroups)'=='true' And '$(AzureManagementCertificateThumbprint)'=='' "
+      Condition=" '$(AzureAffinityGroups)'=='true' And '%(AzureAffinityGroup.Identity)'!='' And '$(AzureManagementCertificateThumbprint)'=='' "
       Text="Please supply 'AzureManagementCertificateThumbprint' property." />
     <Exec
-      Condition=" '$(AzureAffinityGroups)'=='true' "
+      Condition=" '$(AzureAffinityGroups)'=='true' And '%(AzureAffinityGroup.Identity)'!='' "
       Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File $(MSBuildThisFileDirectory)\StealFocus.Build.WindowsAzure.CreateAzureAffinityGroup.ps1 -currentDirectory $(MSBuildThisFileDirectory) -subscriptionId %22$(AzureSubscriptionId)%22 -managementCertificateThumbprint %22$(AzureManagementCertificateThumbprint)%22 -affinityGroupName %22%(AzureAffinityGroup.Identity)%22 -affinityGroupLabel %22%(AzureAffinityGroup.Label)%22 -affinityGroupLocation %22%(AzureAffinityGroup.Location)%22"
       WorkingDirectory="." />
   </Target>
@@ -43,13 +43,13 @@
         PropertyName="AzureStorageAccounts" />
     </CreateProperty>
     <Error
-      Condition=" '$(AzureStorageAccounts)'=='true' And '$(AzureSubscriptionId)'=='' "
+      Condition=" '$(AzureStorageAccounts)'=='true' And '%(AzureStorageAccount.Identity)'!='' And '$(AzureSubscriptionId)'=='' "
       Text="Please supply 'AzureSubscriptionId' property." />
     <Error
-      Condition=" '$(AzureStorageAccounts)'=='true' And '$(AzureManagementCertificateThumbprint)'=='' "
+      Condition=" '$(AzureStorageAccounts)'=='true' And '%(AzureStorageAccount.Identity)'!='' And '$(AzureManagementCertificateThumbprint)'=='' "
       Text="Please supply 'AzureManagementCertificateThumbprint' property." />
     <Exec
-      Condition=" '$(AzureStorageAccounts)'=='true' "
+      Condition=" '$(AzureStorageAccounts)'=='true' And '%(AzureStorageAccount.Identity)'!='' "
       Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File $(MSBuildThisFileDirectory)\StealFocus.Build.WindowsAzure.CreateAzureStorageAccount.ps1 -currentDirectory $(MSBuildThisFileDirectory) -subscriptionId %22$(AzureSubscriptionId)%22 -managementCertificateThumbprint %22$(AzureManagementCertificateThumbprint)%22 -affinityGroupName %22%(AzureStorageAccount.AffinityGroupName)%22 -storageAccountName %22%(AzureStorageAccount.Identity)%22 -storageAccountLabel %22%(AzureStorageAccount.Label)%22"
       WorkingDirectory="." />
   </Target>

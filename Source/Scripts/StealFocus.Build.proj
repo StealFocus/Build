@@ -22,6 +22,10 @@
       Condition=" '$(IsDesktopBuild)'!='true' "
       SourceFiles="@(NuGetPackages)"
       DestinationFolder="$(DropLocationForBuild)" />
+    <Copy
+      Condition=" '$(IsDesktopBuild)'!='true' "
+      SourceFiles="@(NuGetPackages)"
+      DestinationFolder="\\IP-0A3AE60A\NuGetPackages\" />
   </Target>
 
 </Project>

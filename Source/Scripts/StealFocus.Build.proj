@@ -24,12 +24,12 @@
       DestinationFolder="$(DropLocationForBuild)" />
     <!-- Copy Trunk build to StealFocus NuGet feed. -->
     <Copy
-      Condition=" '$(IsDesktopBuild)'!='true' And '$(BranchName)'=='Trunk' "
+      Condition=" '$(IsDesktopBuild)'!='true' And '$(BranchName)'=='Master' "
       SourceFiles="@(NuGetPackages)"
       DestinationFolder="\\IP-0A3AE60A\NuGetPackages\" />
     <!-- Push non-Trunk builds to NuGet.org feed -->
     <Exec
-      Condition=" '$(IsDesktopBuild)'!='true' And '$(BranchName)'!='Trunk' "
+      Condition=" '$(IsDesktopBuild)'!='true' And '$(BranchName)'!='Master' "
       Command='..\..\..\..\Tools\NuGet\NuGet.exe Push "%(NuGetPackages.FullPath)"'
       WorkingDirectory="..\Artefacts\NuGet\StealFocus.Build" />
   </Target>

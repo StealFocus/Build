@@ -50,10 +50,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <NuGetPackage Include="$(SolutionDirectoryPath)\*\packages.config" />
-  </ItemGroup>
-  
-  <ItemGroup>
     <DatabaseProject Include="$(SolutionDirectoryPath)\Acme.PetShop.Database\Acme.PetShop.Database.dbproj">
       <Deploy>true</Deploy>
       <ConfigurationToDeploy>Debug</ConfigurationToDeploy>
@@ -240,41 +236,41 @@
 
   <ItemGroup>
     <!-- Add "MSDeployAction" items as required. These will be deployed with MSDeploy. -->
-    <MSDeployAction Include="UK01005-Acme.PetShop.Web.UI">
+    <MSDeployAction Include="$(COMPUTERNAME)-Acme.PetShop.Web.UI">
       <RequiredBranchName>Unspecified</RequiredBranchName>
-      <TargetServer>UK01005</TargetServer>
+      <TargetServer>$(COMPUTERNAME)</TargetServer>
       <IisWebApplicationName>AcmeWebSite2/Acme.PetShop.Web.UI</IisWebApplicationName>
       <IisWebApplicationPoolName></IisWebApplicationPoolName>
       <IisVirtualDirectoryPhysicalPath>C:\WebSites\AcmeWebSite\Acme.PetShop.Web.UI</IisVirtualDirectoryPhysicalPath>
-      <PackageDirectoryPath>$(BuildDirectoryPath)\Release\_PublishedWebsites\Acme.PetShop.Web.UI_Package</PackageDirectoryPath>
+      <PackageDirectoryPath>$(BuildDirectoryPath)\Debug\_PublishedWebsites\Acme.PetShop.Web.UI_Package</PackageDirectoryPath>
       <DeleteFilesOnTarget>false</DeleteFilesOnTarget>
     </MSDeployAction>
   </ItemGroup>
 
   <PropertyGroup>
-    <AzureSubscriptionId>94b2a885-75c8-4bab-950a-8f7183b7e07c</AzureSubscriptionId>
+    <AzureSubscriptionId>___</AzureSubscriptionId>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(COMPUTERNAME)'=='UK01005' ">
-    <AzureManagementCertificateThumbprint>194E98FC3435855FF3CFA6B4D3EA8273CAFF3ABA</AzureManagementCertificateThumbprint>
+  <PropertyGroup>
+    <AzureManagementCertificateThumbprint>___</AzureManagementCertificateThumbprint>
   </PropertyGroup>
 
   <ItemGroup>
-    <AzureAffinityGroup Include="BeazleyWestEuropeSys">
+    <!--<AzureAffinityGroup Include="BeazleyWestEuropeSys">
       <Label>Beazley - West Europe - System Test</Label>
       <Location>West Europe</Location>
-    </AzureAffinityGroup>
+    </AzureAffinityGroup>-->
   </ItemGroup>
   
   <ItemGroup>
-    <AzureStorageAccount Include="bzytasksweurosys">
+    <!--<AzureStorageAccount Include="bzytasksweurosys">
       <AffinityGroupName>BeazleyWEuroSys</AffinityGroupName>
       <Label>Beazley.Tasks - West Europe - System Test</Label>
-    </AzureStorageAccount>
+    </AzureStorageAccount>-->
   </ItemGroup>
   
   <ItemGroup>
-    <AzurePublishAction Include="Acme.PetShop.Azure">
+    <!--<AzurePublishAction Include="Acme.PetShop.Azure">
       <AffinityGroupName>BeazleyWEuroSys</AffinityGroupName>
       <HostedServiceName>BzyTasks-WEur-Sys</HostedServiceName>
       <HostedServiceLabel>Beazley.Tasks - West Europe - System Test</HostedServiceLabel>
@@ -284,11 +280,11 @@
       <DeploymentLabel>Acme.PetShop v$(VersionNumber)</DeploymentLabel>
       <RemoveStagingEnvironmentAfterwards>true</RemoveStagingEnvironmentAfterwards>
       <PromoteToProductionEnvironment>true</PromoteToProductionEnvironment>
-      <!-- Set "DeployForTest" to true to have the Azure application deployed during the "DeployForTest" stage of the build. -->
+      --><!-- Set "DeployForTest" to true to have the Azure application deployed during the "DeployForTest" stage of the build. --><!--
       <DeployForTest>false</DeployForTest>
-      <!-- Set "RequiredBranchName" to have the Azure application deployed during the "EnvironmentDeploy" stage of the build. -->
+      --><!-- Set "RequiredBranchName" to have the Azure application deployed during the "EnvironmentDeploy" stage of the build. --><!--
       <RequiredBranchName>Trunk</RequiredBranchName>
-    </AzurePublishAction>
+    </AzurePublishAction>-->
   </ItemGroup>
   
   <!-- Only called if "IsInitialiseEnvironmentBuild" property is set to "true". -->

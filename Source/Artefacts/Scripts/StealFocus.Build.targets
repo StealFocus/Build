@@ -29,10 +29,6 @@
     <MSTestVersion>$(VisualStudioVersion)</MSTestVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(InstallNuGetPackages)' == '' ">
-    <InstallNuGetPackages>false</InstallNuGetPackages>
-  </PropertyGroup>
-
   <PropertyGroup Condition=" '$(MaxBuildTimeInMinutes)'=='' ">
     <MaxBuildTimeInMinutes>10</MaxBuildTimeInMinutes>
   </PropertyGroup>
@@ -250,12 +246,6 @@
     <Error
       Condition=" '%(EventLogSource.EventLogName)'=='' And '%(EventLogSource.Identity)'!='' "
       Text="When configuring 'EventLogSource' ItemGroups, you must supply 'EventLogName' metadata." />
-    <Error
-      Condition=" '$(InstallNuGetPackages)'=='true' And '$(NuGetDotExePath)'=='' "
-      Text="When specifying 'InstallNuGetPackages' as true, you must supply a property for 'NuGetDotExePath' (NuGet.exe can be downloaded from http://nuget.codeplex.com/releases/view/58939)." />
-    <Error
-      Condition=" '$(InstallNuGetPackages)'=='true' And '%(NuGetPackage.Identity)'=='' "
-      Text="When specifying 'InstallNuGetPackages' as true, you must supply an Item Group for 'NuGetPackage' (where the Includes point to 'packages.config' locations)." />
     <Message
       Importance="high"
       Text="...complete." />
@@ -288,9 +278,6 @@
       Text="'ForceInitialiseEnvironment' is '$(ForceInitialiseEnvironment)'." />
     <Message
       Importance="high"
-      Text="'InstallNuGetPackages' is '$(InstallNuGetPackages)'." />
-    <Message
-      Importance="high"
       Text="'IisVersion' is '$(IisVersion)'." />
     <Message
       Importance="high"
@@ -319,10 +306,6 @@
     <Message
       Importance="high"
       Text="'MSTestVersion' is '$(MSTestVersion)'." />
-    <Message
-      Condition=" '$(InstallNuGetPackages)'=='true' "
-      Importance="high"
-      Text="'NuGetDotExePath' is '$(NuGetDotExePath)'." />
     <Message
       Importance="high"
       Text="'SdkPath' is '$(SdkPath)'." />
@@ -471,22 +454,6 @@
     <CallTarget
       Condition=" '$(CreateStateFile)'=='true' "
       Targets="CreateStateFile" />
-    <Message
-      Condition=" '$(InstallNuGetPackages)'=='true' "
-      Text="Installing NuGet packages specified in the following files:" />
-    <Message
-      Condition=" '$(InstallNuGetPackages)'=='true' And '%(NuGetPackage.Identity)'!='' "
-      Text="- %(NuGetPackage.FullPath)" />
-    <Message
-      Condition=" '$(InstallNuGetPackages)'=='true' And '%(NuGetPackage.Identity)'=='' "
-      Text="- (None configured)" />
-    <!-- "path1\NuGet.exe" install "path2\packages.config" -->
-    <!--
-    Waiting for NuGet fix (not playing nicely with internet proxies).
-    <Exec
-      Condition=" '$(InstallNuGetPackages)'=='true' "
-      Command="%22$(NuGetDotExePath)%22 install %22%(NuGetPackage.FullPath)%22" />
-    -->
   </Target>
 
   <Target Name="AfterInitialiseEnvironmentCustom">
@@ -1256,7 +1223,7 @@
       Text="The build took $(BuildTimeInMinutes) minutes." />
     <Error 
       Condition=" '$(BuildOverran)'=='True' " 
-      Text="The build took $(BuildTimeInMinutes) minutes which is longer than the configured allowed length of $(MaxBuildTimeInMinutes) minute(s)." />
+      Text="The build took $(BuildTimeInMinutes) minutes which is longer than the configured allowed length of $(MaxBuildTimeInMinutes) minute(s). If you wish for the build to be able to run longer without failing, please set a 'MaxBuildTimeInMinutes' property." />
   </Target>
 
   <Target Name="EnvironmentDeploy" DependsOnTargets="$(EnvironmentDeployDependsOn)" />

@@ -11,7 +11,7 @@
     <ProductName>PetShop</ProductName>
     <StrongNamePublicKey>00240000048000009400000006020000002400005253413100040000010001008b64f4a2043d07292b5d31a47c92297c696ed70642264ea30324341cbcd7c41c8fc7a44d11bf9e23026af7e21723e5e72d640eccb78aed232e39392bb8d3ec19902b6ce28fd33936ef022d8666631a55188b028a2251ce0b97eb115ed93e3a61f336ca1888d342cfcab4b1ed6c118707abfcedb55d634fe503892698fbbee6cb</StrongNamePublicKey>
     <StrongNamePublicKeyToken>cc55730e577eeaaf</StrongNamePublicKeyToken>
-    <StyleCopVersion>4.5</StyleCopVersion>
+    <StyleCopVersion>4.7</StyleCopVersion>
   </PropertyGroup>
 
 </Project>

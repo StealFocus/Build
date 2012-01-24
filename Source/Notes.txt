@@ -3,16 +3,15 @@ To Do
  - MSI and different configurations (so we can migrate other solutions in)
  - Sandcastle
  - Before and After events for IIS steps
- - Mobile version of Beazley tasks
  - Have a deployment build following the compile build
- - Split out azure sections of build script so we can run in a deployment build (msdeploy is already spilt so can called separately)
- - Test for whitespace in path
+ - Split out azure sections of build script so we can run in a deployment build (msdeploy is already spilt so can be called separately)
+ - Test for whitespace in solution path (to see if we are missing quotes anywhere)
  - Add generic scripts to create NuGet package.
  - There will be a problem if an Azure Role (strongly named) references a class library which is delay signed.
  - Project configuration check for MSDeploy?
  - Project configuration check for Database projects (see below)?
  - Add "Full Build" with ForceInitaliseEnvironment
- - Fix <Exec Condition=" '$(InstallNuGetPackages)'=='true' " Command="%22$(NuGetDotExePath)%22 install %22%(NuGetPackage.FullPath)%22" /> issue by using same approach as PowerShell.
+ x Fix <Exec Condition=" '$(InstallNuGetPackages)'=='true' " Command="%22$(NuGetDotExePath)%22 install %22%(NuGetPackage.FullPath)%22" /> issue by using same approach as PowerShell.
  - Not re-generating AssemblyInfoCommon for "Release" build (should be as the Configuration is written in the file).
  - Disallow delay signed Azure Roles
  - Seems to be re-compiling between cmd line builds?
@@ -23,16 +22,17 @@ To Do
  - Project checking allows DelaySigned switch to be applied to Azure Role projects.
  - Test properties are listed twice.
  - Script is trying to do StyleCop targets fix but StyleCop is not installed.
- - Check of Azure Cmdlets not causing a TFS Build error.
+ - Check of Azure Cmdlets install is not causing a TFS Build error if it fails.
  - (?) Write something to parse TFS logs looking for unexpected instances of "\csc.exe" (?)
- x Script is insisting on Azure cert/sub id
+ - Script is insisting on Azure cert/sub id
  - MSDeploy - need to use "Include IIS settings as configured in IIS" setting.
  - For TFS2010 build, can we determine Build Number prefix from the name of the Team Build?
  - "Before" and "after" targets not being called in Team Build.
- - Add in NuGet mechanism (include nuget.exe in package etc)
+ x Add in NuGet mechanism (include nuget.exe in package etc)
  - Check security on IIS root site to see if it will work with Azure (NB - MSDN forum)
  - Running "CreateAzureAffinityGroups" and "CreateAzureStorageAccounts" targets (after tests) on a desktop build.
  - "AfterDropBuildCustom" and "BeforeDropBuildCustom" are being called on Desktop Builds.
+ - Add a step to the project configuration check to test for usage of NuGet targets file.
 
 Database
 ========

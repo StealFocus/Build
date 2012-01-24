@@ -501,6 +501,7 @@
   </Target>
 
   <Target Name="CorePackageWebProjectsForConfiguration">
+    <!-- To Do: "IntermediateOutputPath" instead of "_PackageTempDir"? --> 
     <!-- Package with delay signing (it's a desktop build). -->
     <MSBuild
       Condition=" '$(IsDesktopBuild)'=='true' And '%(WebProject.Package)'=='true' "

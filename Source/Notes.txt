@@ -17,7 +17,7 @@ To Do
  - Seems to be re-compiling between cmd line builds?
  - Report times for each stage of build and summarise at the end.
  - Put IIS version etc in TFS Build definition (do not require, allow defaults)
- - Check for usage of IIS in web project files.
+ - Check for usage of IIS in web project files "<UseIIS>True</UseIIS>"
  - Improve error message when missing import is detected in csproj files.
  - Project checking allows DelaySigned switch to be applied to Azure Role projects.
  - Test properties are listed twice.

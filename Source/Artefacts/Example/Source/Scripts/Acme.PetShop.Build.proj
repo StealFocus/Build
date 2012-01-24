@@ -192,18 +192,18 @@
 
   <ItemGroup>
     <!-- Add "WebApplication" items as required. These will create web applications in IIS with the provided settings. -->
-    <WebApplication Include="$(SolutionDirectoryPath)\WebApp1">
+    <WebApplication Include="$(SolutionDirectoryPath)\Acme.PetShop.Web.Services">
       <Name>Acme.PetShop.Web.Services</Name>
-      <WebSiteName>AcmeWebSite</WebSiteName>
+      <WebSiteName>Default Web Site</WebSiteName>
       <WebApplicationPoolName>Acme.PetShop.Web.Services</WebApplicationPoolName>
       <AnonymousAuthentication>true</AnonymousAuthentication>
       <BasicAuthentication>false</BasicAuthentication>
       <DigestAuthentication>false</DigestAuthentication>
       <WindowsAuthentication>false</WindowsAuthentication>
     </WebApplication>
-    <WebApplication Include="$(SolutionDirectoryPath)\WebApp2">
+    <WebApplication Include="$(SolutionDirectoryPath)\Acme.PetShop.Web.UI">
       <Name>Acme.PetShop.Web.UI</Name>
-      <WebSiteName>AcmeWebSite</WebSiteName>
+      <WebSiteName>Default Web Site</WebSiteName>
       <WebApplicationPoolName>Acme.PetShop.Web.UI</WebApplicationPoolName>
       <AnonymousAuthentication>true</AnonymousAuthentication>
       <BasicAuthentication>false</BasicAuthentication>
@@ -240,7 +240,7 @@
       <RequiredBranchName>Unspecified</RequiredBranchName>
       <TargetServer>$(COMPUTERNAME)</TargetServer>
       <IisWebApplicationName>AcmeWebSite2/Acme.PetShop.Web.UI</IisWebApplicationName>
-      <IisWebApplicationPoolName></IisWebApplicationPoolName>
+      <IisWebApplicationPoolName>Acme.PetShop.Web.UI_MSDeploy</IisWebApplicationPoolName>
       <IisVirtualDirectoryPhysicalPath>C:\WebSites\AcmeWebSite\Acme.PetShop.Web.UI</IisVirtualDirectoryPhysicalPath>
       <PackageDirectoryPath>$(BuildDirectoryPath)\Debug\_PublishedWebsites\Acme.PetShop.Web.UI_Package</PackageDirectoryPath>
       <DeleteFilesOnTarget>false</DeleteFilesOnTarget>

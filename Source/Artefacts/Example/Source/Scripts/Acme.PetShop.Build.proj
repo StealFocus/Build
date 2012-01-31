@@ -240,6 +240,10 @@
       <RequiredBranchName>Unspecified</RequiredBranchName>
       <TargetServer>$(COMPUTERNAME)</TargetServer>
       <IisWebApplicationName>AcmeWebSite2/Acme.PetShop.Web.UI</IisWebApplicationName>
+      <!--
+      Use the 'IisWebSiteBinding' value only when the 'IisWebApplicationName' above is a website (not a web application or virtual directory).
+      <IisWebSiteBinding>*:8001:</IisWebSiteBinding>
+      -->
       <IisWebApplicationPoolName>Acme.PetShop.Web.UI_MSDeploy</IisWebApplicationPoolName>
       <IisVirtualDirectoryPhysicalPath>C:\WebSites\AcmeWebSite\Acme.PetShop.Web.UI</IisVirtualDirectoryPhysicalPath>
       <PackageDirectoryPath>$(BuildDirectoryPath)\Debug\_PublishedWebsites\Acme.PetShop.Web.UI_Package</PackageDirectoryPath>

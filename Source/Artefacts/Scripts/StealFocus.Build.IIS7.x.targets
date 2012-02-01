@@ -156,6 +156,57 @@
       PipelineMode="%(WebApplicationPool.PipelineMode)" />
   </Target>
 
+  <Target Name="ClearDefaultDocuments">
+    <!--
+    appcmd.exe set config "$(WebSiteName)" -section:system.webServer/defaultDocument /-"files.[value='Default.htm']"
+    appcmd.exe set config "$(WebSiteName)" -section:system.webServer/defaultDocument /-"files.[value='Default.asp']"
+    appcmd.exe set config "$(WebSiteName)" -section:system.webServer/defaultDocument /-"files.[value='index.htm']"
+    appcmd.exe set config "$(WebSiteName)" -section:system.webServer/defaultDocument /-"files.[value='index.html']"
+    appcmd.exe set config "$(WebSiteName)" -section:system.webServer/defaultDocument /-"files.[value='default.aspx']"
+    appcmd.exe set config "$(WebSiteName)" -section:system.webServer/defaultDocument /-"files.[value='Default.htm']"
+    %22 = "
+    -->
+    <Exec
+      ContinueOnError="true"
+      Condition=" '$(WebSiteClearDefaultDocuments)'=='true' "
+      Command="$(AppCmdPath) set config %22$(WebSiteName)%22 -section:system.webServer/defaultDocument /-%22files.[value='Default.htm']%22" />
+    <Exec
+      ContinueOnError="true"
+      Condition=" '$(WebSiteClearDefaultDocuments)'=='true' "
+      Command="$(AppCmdPath) set config %22$(WebSiteName)%22 -section:system.webServer/defaultDocument /-%22files.[value='Default.asp']%22" />
+    <Exec
+      ContinueOnError="true"
+      Condition=" '$(WebSiteClearDefaultDocuments)'=='true' "
+      Command="$(AppCmdPath) set config %22$(WebSiteName)%22 -section:system.webServer/defaultDocument /-%22files.[value='index.htm']%22" />
+    <Exec
+      ContinueOnError="true"
+      Condition=" '$(WebSiteClearDefaultDocuments)'=='true' "
+      Command="$(AppCmdPath) set config %22$(WebSiteName)%22 -section:system.webServer/defaultDocument /-%22files.[value='index.html']%22" />
+    <Exec
+      ContinueOnError="true"
+      Condition=" '$(WebSiteClearDefaultDocuments)'=='true' "
+      Command="$(AppCmdPath) set config %22$(WebSiteName)%22 -section:system.webServer/defaultDocument /-%22files.[value='default.aspx']%22" />
+    <Exec
+      ContinueOnError="true"
+      Condition=" '$(WebSiteClearDefaultDocuments)'=='true' "
+      Command="$(AppCmdPath) set config %22$(WebSiteName)%22 -section:system.webServer/defaultDocument /-%22files.[value='Default.htm']%22" />
+    <Exec
+      ContinueOnError="true"
+      Condition=" '$(WebSiteClearDefaultDocuments)'=='true' "
+      Command="$(AppCmdPath) set config %22$(WebSiteName)%22 -section:system.webServer/defaultDocument /-%22files.[value='iisstart.htm.htm']%22" />
+  </Target>
+
+  <Target Name="SetDefaultDocumentName">
+    <!--
+    appcmd.exe set config "$(WebSiteName)" -section:system.webServer/defaultDocument /+"files.[value='default.html']"
+    %22 = "
+    -->
+    <Exec
+      ContinueOnError="true"
+      Condition=" '$(DefaultDocumentName)'!='' "
+      Command="$(AppCmdPath) set config %22$(WebSiteName)%22 -section:system.webServer/defaultDocument /+%22files.[value='$(DefaultDocumentName)']%22" />
+  </Target>
+
   <Target Name="CreateWebSite">
     <ConvertToAbsolutePath Paths="$(WebSitePath)">
       <Output
@@ -201,6 +252,26 @@
     <Exec
       Condition=" '$(WebSiteWindowsAuthentication)'!='false' "
       Command="$(AppCmdPath) set config %22$(WebSiteName)%22 -section:system.webServer/security/authentication/windowsAuthentication /enabled:%22$(WebSiteWindowsAuthentication)%22 /commit:apphost" />
+    <MSBuild
+      Condition=" '$(WebSiteName)'!='DefaultWebSiteName' "
+      Projects="$(MSBuildProjectFile)" 
+      Targets="ClearDefaultDocuments" 
+      Properties="WebSiteName=$(WebSiteName);ClearDefaultDocuments=$(WebSiteClearDefaultDocuments)" />
+    <MSBuild
+      Condition=" '$(WebSiteName)'=='DefaultWebSiteName' And '$(ModifyDefaultWebSite)'=='true' "
+      Projects="$(MSBuildProjectFile)"
+      Targets="ClearDefaultDocuments"
+      Properties="WebSiteName=$(WebSiteName);ClearDefaultDocuments=$(WebSiteClearDefaultDocuments)" />
+    <MSBuild
+      Condition=" '$(WebSiteName)'!='DefaultWebSiteName' "
+      Projects="$(MSBuildProjectFile)"
+      Targets="SetDefaultDocumentName"
+      Properties="WebSiteName=$(WebSiteName);DefaultDocumentName=$(WebSiteDefaultDocumentName)" />
+    <MSBuild
+      Condition=" '$(WebSiteName)'=='DefaultWebSiteName' And '$(ModifyDefaultWebSite)'=='true' "
+      Projects="$(MSBuildProjectFile)"
+      Targets="SetDefaultDocumentName"
+      Properties="WebSiteName=$(WebSiteName);DefaultDocumentName=$(WebSiteDefaultDocumentName)" />
   </Target>
   
   <Target Name="CreateWebSites">
@@ -227,7 +298,9 @@
         WebSiteAnonymousAuthentication=%(WebSite.AnonymousAuthentication);
         WebSiteBasicAuthentication=%(WebSite.BasicAuthentication);
         WebSiteDigestAuthentication=%(WebSite.DigestAuthentication);
-        WebSiteWindowsAuthentication=%(WebSite.WindowsAuthentication)
+        WebSiteWindowsAuthentication=%(WebSite.WindowsAuthentication);
+        WebSiteClearDefaultDocuments=%(WebSite.ClearDefaultDocuments);
+        WebSiteDefaultDocumentName=%(WebSite.DefaultDocumentName)
         " />
     <Message
       Importance="high"
@@ -258,7 +331,9 @@
         AnonymousAuthentication=%(WebApplication.AnonymousAuthentication);
         BasicAuthentication=%(WebApplication.BasicAuthentication);
         DigestAuthentication=%(WebApplication.DigestAuthentication);
-        WindowsAuthentication=%(WebApplication.WindowsAuthentication);">
+        WindowsAuthentication=%(WebApplication.WindowsAuthentication);
+        ClearDefaultDocuments=%(WebApplication.ClearDefaultDocuments);
+        DefaultDocumentName=%(WebApplication.DefaultDocumentName)">
       <Output
         TaskParameter="Include"
         ItemName="Application"/>
@@ -291,6 +366,14 @@
     <Exec
       Condition=" '%(Application.Identity)'!='' And '%(Application.WindowsAuthentication)'!='false' "
       Command="$(AppCmdPath) set config %22$(WebSiteName)%(Application.Identity)%22 -section:system.webServer/security/authentication/windowsAuthentication /enabled:%22%(Application.WindowsAuthentication)%22 /commit:apphost" />
+    <MSBuild
+      Projects="$(MSBuildProjectFile)"
+      Targets="ClearDefaultDocuments"
+      Properties="WebSiteName=$(WebSiteName);ClearDefaultDocuments=%(Application.ClearDefaultDocuments)" />
+    <MSBuild
+      Projects="$(MSBuildProjectFile)"
+      Targets="SetDefaultDocumentName"
+      Properties="WebSiteName=$(WebSiteName);DefaultDocumentName=%(Application.DefaultDocumentName)" />
   </Target>
   
   <Target Name="CreateWebApplications">

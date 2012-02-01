@@ -160,6 +160,8 @@
       <BasicAuthentication>false</BasicAuthentication>
       <DigestAuthentication>false</DigestAuthentication>
       <WindowsAuthentication>true</WindowsAuthentication>
+      <ClearDefaultDocuments>true</ClearDefaultDocuments>
+      <DefaultDocumentName>default.html</DefaultDocumentName>
     </WebSite>
     <WebSite Include="$(SolutionDirectoryPath)\WebSite2">
       <Name>AcmeWebSite2</Name>
@@ -169,6 +171,8 @@
       <BasicAuthentication>false</BasicAuthentication>
       <DigestAuthentication>false</DigestAuthentication>
       <WindowsAuthentication>true</WindowsAuthentication>
+      <ClearDefaultDocuments>true</ClearDefaultDocuments>
+      <DefaultDocumentName>default.html</DefaultDocumentName>
     </WebSite>
   </ItemGroup>
 
@@ -200,6 +204,8 @@
       <BasicAuthentication>false</BasicAuthentication>
       <DigestAuthentication>false</DigestAuthentication>
       <WindowsAuthentication>false</WindowsAuthentication>
+      <ClearDefaultDocuments>true</ClearDefaultDocuments>
+      <DefaultDocumentName>default.html</DefaultDocumentName>
     </WebApplication>
     <WebApplication Include="$(SolutionDirectoryPath)\Acme.PetShop.Web.UI">
       <Name>Acme.PetShop.Web.UI</Name>
@@ -209,6 +215,8 @@
       <BasicAuthentication>false</BasicAuthentication>
       <DigestAuthentication>false</DigestAuthentication>
       <WindowsAuthentication>false</WindowsAuthentication>
+      <ClearDefaultDocuments>true</ClearDefaultDocuments>
+      <DefaultDocumentName>default.html</DefaultDocumentName>
     </WebApplication>
     <!--<WebApplication Include="$(SolutionDirectoryPath)\Acme.PetShop.Web.UI">
       <Name>Acme.PetShop.Web.UI</Name>
@@ -218,6 +226,8 @@
       <BasicAuthentication>false</BasicAuthentication>
       <DigestAuthentication>false</DigestAuthentication>
       <WindowsAuthentication>true</WindowsAuthentication>
+      <ClearDefaultDocuments>true</ClearDefaultDocuments>
+      <DefaultDocumentName>default.html</DefaultDocumentName>
     </WebApplication>-->
   </ItemGroup>
   

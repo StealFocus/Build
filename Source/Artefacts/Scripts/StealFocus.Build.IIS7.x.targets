@@ -236,19 +236,15 @@
     appcmd.exe set config "$(WebSiteName)" -section:system.webServer/security/authentication/windowsAuthentication /enabled:"$(WebSiteWindowsAuthentication)" /commit:apphost
     %22 = "
     -->
-    <!-- anonymousAuthentication is enabled by default (and we've just created the website), so only run if the value is not set to true -->
     <Exec
       Condition=" '$(WebSiteAnonymousAuthentication)'!='true' "
       Command="$(AppCmdPath) set config %22$(WebSiteName)%22 -section:system.webServer/security/authentication/anonymousAuthentication /enabled:%22$(WebSiteAnonymousAuthentication)%22 /commit:apphost" />
-    <!-- basicAuthentication is disabled by default (and we've just created the website), so only run if the value is not set to false -->
     <Exec
       Condition=" '$(WebSiteBasicAuthentication)'!='false' "
       Command="$(AppCmdPath) set config %22$(WebSiteName)%22 -section:system.webServer/security/authentication/basicAuthentication /enabled:%22$(WebSiteBasicAuthentication)%22 /commit:apphost" />
-    <!-- digestAuthentication is disabled by default (and we've just created the website), so only run if the value is not set to false -->
     <Exec
       Condition=" '$(WebSiteDigestAuthentication)'!='false' "
       Command="$(AppCmdPath) set config %22$(WebSiteName)%22 -section:system.webServer/security/authentication/digestAuthentication /enabled:%22$(WebSiteDigestAuthentication)%22 /commit:apphost" />
-    <!-- windowsAuthentication is disabled by default (and we've just created the website), so only run if the value is not set to false -->
     <Exec
       Condition=" '$(WebSiteWindowsAuthentication)'!='false' "
       Command="$(AppCmdPath) set config %22$(WebSiteName)%22 -section:system.webServer/security/authentication/windowsAuthentication /enabled:%22$(WebSiteWindowsAuthentication)%22 /commit:apphost" />
@@ -350,21 +346,17 @@
     appcmd.exe set config "$(WebSiteName)/%(Application.Identity)" -section:system.webServer/security/authentication/windowsAuthentication /enabled:"%(Application.WindowsAuthentication)" /commit:apphost
     %22 = "
     -->
-    <!-- anonymousAuthentication is enabled by default (and we've just created the application), so only run if the value is not set to true -->
     <Exec
-      Condition=" '%(Application.Identity)'!='' And '%(Application.AnonymousAuthentication)'!='true' "
+      Condition=" '%(Application.Identity)'!='' "
       Command="$(AppCmdPath) set config %22$(WebSiteName)%(Application.Identity)%22 -section:system.webServer/security/authentication/anonymousAuthentication /enabled:%22%(Application.AnonymousAuthentication)%22 /commit:apphost" />
-    <!-- basicAuthentication is disabled by default (and we've just created the application), so only run if the value is not set to false -->
     <Exec
-      Condition=" '%(Application.Identity)'!='' And '%(Application.BasicAuthentication)'!='false' "
+      Condition=" '%(Application.Identity)'!='' "
       Command="$(AppCmdPath) set config %22$(WebSiteName)%(Application.Identity)%22 -section:system.webServer/security/authentication/basicAuthentication /enabled:%22%(Application.BasicAuthentication)%22 /commit:apphost" />
-    <!-- digestAuthentication is disabled by default (and we've just created the application), so only run if the value is not set to false -->
     <Exec
-      Condition=" '%(Application.Identity)'!='' And '%(Application.DigestAuthentication)'!='false' "
+      Condition=" '%(Application.Identity)'!='' "
       Command="$(AppCmdPath) set config %22$(WebSiteName)%(Application.Identity)%22 -section:system.webServer/security/authentication/digestAuthentication /enabled:%22%(Application.DigestAuthentication)%22 /commit:apphost" />
-    <!-- windowsAuthentication is disabled by default (and we've just created the application), so only run if the value is not set to false -->
     <Exec
-      Condition=" '%(Application.Identity)'!='' And '%(Application.WindowsAuthentication)'!='false' "
+      Condition=" '%(Application.Identity)'!='' "
       Command="$(AppCmdPath) set config %22$(WebSiteName)%(Application.Identity)%22 -section:system.webServer/security/authentication/windowsAuthentication /enabled:%22%(Application.WindowsAuthentication)%22 /commit:apphost" />
     <MSBuild
       Projects="$(MSBuildProjectFile)"

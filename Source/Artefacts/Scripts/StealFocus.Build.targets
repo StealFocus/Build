@@ -482,26 +482,8 @@
     <!-- To be overridden in inheriting script. -->
   </Target>
 
-  <Target Name="CleanMSDeployArchiveXml">
-    <MSBuild.ExtensionPack.Xml.XmlFile
-      TaskAction="ReadElementXml"
-      File="$(WebPackageArchiveXmlFilePath)"
-      XPath="/sitemanifest/appHostConfig/relativeLocation/section[@name='system.webServer/httpErrors']">
-      <Output
-        TaskParameter="Value"
-        PropertyName="HttpErrorsSectionXmlContent"/>
-    </MSBuild.ExtensionPack.Xml.XmlFile>
-    <MSBuild.ExtensionPack.Xml.XmlFile
-      Condition=" '$(HttpErrorsSectionXmlContent)'!='' "
-      ContinueOnError="true"
-      TaskAction="RemoveElement"
-      File="$(WebPackageArchiveXmlFilePath)"
-      Element="httpErrors"
-      ParentElement="/sitemanifest/appHostConfig/relativeLocation/section[@name='system.webServer/httpErrors']" />
-  </Target>
-
   <Target Name="CorePackageWebProjectsForConfiguration">
-    <!-- To Do: "IntermediateOutputPath" instead of "_PackageTempDir"? --> 
+    <!-- To Do: "IntermediateOutputPath" instead of "_PackageTempDir"? -->
     <!-- Package with delay signing (it's a desktop build). -->
     <MSBuild
       Condition=" '$(IsDesktopBuild)'=='true' And '%(WebProject.Package)'=='true' "
@@ -514,29 +496,19 @@
       Projects="%(WebProject.Identity)"
       Properties="Configuration=$(Configuration);OutputPath=$(OutputPath);PackageAsSingleFile=%(WebProject.PackageAsSingleFile);_PackageTempDir=%(WebProject.PackageTempDir);IncludeIisSettings=%(WebProject.IncludeIisSettings);IncludeAppPool=%(WebProject.IncludeAppPool);DeployEncryptKey=%(WebProject.DeployEncryptKey);$(Properties);$(CustomPropertiesForBuild);DelaySign=false;AssemblyOriginatorKeyFile=$(StrongNameKeyPairPath)"
       Targets="Package" />
-    <!-- 
-      Remove the "system.webServer/httpErrors" section from the manifest (when it exists) as this causes an error in MSDeploy (it 
-      seems this is a known issue with MSDeploy). The "system.webServer/httpErrors" section takes the default values anyway.
-    -->
-    <ItemGroup>
-      <WebPackageArchiveXmlFile Include="$(BuildDirectoryPath)\**\*_Package\Archive\archive.xml" />
-    </ItemGroup>
-    <Message
-      Importance="high"
-      Text="Removing 'system.webServer/httpErrors' section from the following MSDeploy packages as the presence of this section can cause a fatal error in some scenarios (this is know issue with MSDeploy)." />
-    <Message
-      Condition=" '%(WebPackageArchiveXmlFile.Identity)'!='' "
-      Importance="high"
-      Text="- %(WebPackageArchiveXmlFile.FullPath)" />
-    <Message
-      Condition=" '%(WebPackageArchiveXmlFile.Identity)'=='' "
-      Importance="high"
-      Text="- (None found)" />
+    <!-- Clean-up the MSDeploy XML. -->
+    <CallTarget Targets="CleanArchiveXmlFiles" />
+    <!-- Add the AppPool credentials as parameters to the MSDeploy package(s). -->
     <MSBuild
-      Condition=" '%(WebPackageArchiveXmlFile.Identity)'!='' "
+      Condition=" '%(WebProject.Package)'=='true' "
       Projects="$(MSBuildProjectFile)"
-      Targets="CleanMSDeployArchiveXml"
-      Properties="WebPackageArchiveXmlFilePath=%(WebPackageArchiveXmlFile.FullPath)" />
+      Properties="ParametersXmlFilePath=$(BuildDirectoryPath)\$(Configuration)\_PublishedWebsites\%(WebProject.Filename)_Package\Archive\parameters.xml"
+      Targets="AddAppPoolCredentialsToParametersFile" />
+    <MSBuild
+      Condition=" '%(WebProject.Package)'=='true' "
+      Projects="$(MSBuildProjectFile)"
+      Properties="SetParametersXmlFilePath=$(BuildDirectoryPath)\$(Configuration)\_PublishedWebsites\%(WebProject.Filename)_Package\Archive.SetParameters.xml"
+      Targets="AddAppPoolCredentialsParametersToSetParametersFile" />
     <!-- Delete the 'PackageTempDir' so we don't leave artefacts on the file system. -->
     <RemoveDir
       Condition=" '%(WebProject.Package)'=='true' And Exists('%(WebProject.PackageTempDir)') "

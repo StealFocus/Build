@@ -1,3 +1,49 @@
+IIS
+===
+
+
+Update Web Application
+======================
+appcmd.exe set config  -section:system.applicationHost/sites /[name='Default Web Site'].[path='/StealFocus.TfsExtensions.Web.UI'].[path='/'].physicalPath:"E:\Workspaces\GitHub\StealFocus\TfsExtensions\Source\StealFocus.TfsExtensions.Web.UIas"  /commit:apphost
+appcmd.exe set config  -section:system.applicationHost/sites /[name='Default Web Site'].[path='/StealFocus.TfsExtensions.Web.UI'].applicationPool:"ASP.NET v4.0as"  /commit:apphost
+
+appcmd.exe set config  -section:system.applicationHost/sites /[name='Default Web Site'].[path='/StealFocus.NuGet.Web.UI'].[path='/'].physicalPath:"E:\Workspaces\GitHub\StealFocus\NuGet\Source\StealFocus.NuGet.Web.UIaaaa"  /commit:apphost
+appcmd.exe set config  -section:system.applicationHost/sites /[name='Default Web Site'].[path='/StealFocus.NuGet.Web.UI'].applicationPool:"StealFocus.NuGet.Web.UIaaaa"  /commit:apphost
+
+
+Process (current)
+=================
+Message - List Web Sites being deleted
+Delete Web Site (check exists first)
+Message - List Web Applications being deleted
+Delete Web Application (check exists first)
+Message - List Application Pools being deleted
+Delete Application Pool (check exists first)
+Create Application Pool
+Create Web Site
+Create Web Application
+Create Web Application Managed Handler Mappings
+
+
+Process (desired)
+=================
+Delete Web Site (if indicated, check exists first)
+Delete Web Application (if indicated, check exists first)
+Delete Application Pool (if indicated, check exists first)
+
+Create Application Pool (if not exists)
+Update Application Pool (if exists)
+
+Create Web Site (if not exists)
+Update Web Site (if exists)
+
+Create Web Application (if not exists)
+Update Web Application (if exists)
+
+Create Web Application Managed Handler Mappings (if not exists)
+Update Web Application Managed Handler Mappings (if exists)
+
+
 To Do
 =====
  - MSI and different configurations (so we can migrate other solutions in)

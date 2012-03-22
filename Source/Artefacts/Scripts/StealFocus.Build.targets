@@ -39,7 +39,7 @@
     <DeleteMSTestResultsDirectory>false</DeleteMSTestResultsDirectory>
     <ForceInitialiseEnvironment>false</ForceInitialiseEnvironment>
     <IsInitialiseEnvironmentBuild>true</IsInitialiseEnvironmentBuild>
-    <IsEnvironmentDeployBuild>true</IsEnvironmentDeployBuild>
+    <IsEnvironmentDeployBuild>false</IsEnvironmentDeployBuild>
     <StartTimeStamp>$([System.DateTime]::Now.ToString("yyyy/MM/dd HH:mm:ss"))</StartTimeStamp>
     <StateFilePath>.\StealFocus.Build.state</StateFilePath>
   </PropertyGroup>

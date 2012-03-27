@@ -488,13 +488,13 @@
     <MSBuild
       Condition=" '$(IsDesktopBuild)'=='true' And '%(WebProject.Package)'=='true' "
       Projects="%(WebProject.Identity)"
-      Properties="Configuration=$(Configuration);OutputPath=$(OutputPath);PackageAsSingleFile=%(WebProject.PackageAsSingleFile);_PackageTempDir=%(WebProject.PackageTempDir);IncludeIisSettings=%(WebProject.IncludeIisSettings);IncludeAppPool=%(WebProject.IncludeAppPool);DeployEncryptKey=%(WebProject.DeployEncryptKey);$(Properties);$(CustomPropertiesForBuild)"
+      Properties="Configuration=$(Configuration);OutputPath=$(OutputPath);PackageAsSingleFile=%(WebProject.PackageAsSingleFile);PackageLocation=$(OutputPath)\_PublishedWebsites\%(WebProject.PackageName);_PackageTempDir=%(WebProject.PackageTempDir);IncludeIisSettings=%(WebProject.IncludeIisSettings);IncludeAppPool=%(WebProject.IncludeAppPool);DeployEncryptKey=%(WebProject.DeployEncryptKey);$(Properties);$(CustomPropertiesForBuild)"
       Targets="Package" />
     <!-- Package with full signing (it's a server build). -->
     <MSBuild
       Condition=" '$(IsDesktopBuild)'!='true' And '%(WebProject.Package)'=='true' "
       Projects="%(WebProject.Identity)"
-      Properties="Configuration=$(Configuration);OutputPath=$(OutputPath);PackageAsSingleFile=%(WebProject.PackageAsSingleFile);_PackageTempDir=%(WebProject.PackageTempDir);IncludeIisSettings=%(WebProject.IncludeIisSettings);IncludeAppPool=%(WebProject.IncludeAppPool);DeployEncryptKey=%(WebProject.DeployEncryptKey);$(Properties);$(CustomPropertiesForBuild);DelaySign=false;AssemblyOriginatorKeyFile=$(StrongNameKeyPairPath)"
+      Properties="Configuration=$(Configuration);OutputPath=$(OutputPath);PackageAsSingleFile=%(WebProject.PackageAsSingleFile);PackageLocation=$(OutputPath)\_PublishedWebsites\%(WebProject.PackageName);_PackageTempDir=%(WebProject.PackageTempDir);IncludeIisSettings=%(WebProject.IncludeIisSettings);IncludeAppPool=%(WebProject.IncludeAppPool);DeployEncryptKey=%(WebProject.DeployEncryptKey);$(Properties);$(CustomPropertiesForBuild);DelaySign=false;AssemblyOriginatorKeyFile=$(StrongNameKeyPairPath)"
       Targets="Package" />
     <!-- Clean-up the MSDeploy XML. -->
     <CallTarget Targets="CleanArchiveXmlFiles" />
@@ -502,12 +502,12 @@
     <MSBuild
       Condition=" '%(WebProject.Package)'=='true' "
       Projects="$(MSBuildProjectFile)"
-      Properties="ParametersXmlFilePath=$(BuildDirectoryPath)\$(Configuration)\_PublishedWebsites\%(WebProject.Filename)_Package\Archive\parameters.xml"
+      Properties="ParametersXmlFilePath=$(BuildDirectoryPath)\$(Configuration)\_PublishedWebsites\%(WebProject.PackageName)\Archive\parameters.xml"
       Targets="AddAppPoolCredentialsToParametersFile" />
     <MSBuild
       Condition=" '%(WebProject.Package)'=='true' "
       Projects="$(MSBuildProjectFile)"
-      Properties="SetParametersXmlFilePath=$(BuildDirectoryPath)\$(Configuration)\_PublishedWebsites\%(WebProject.Filename)_Package\Archive.SetParameters.xml"
+      Properties="SetParametersXmlFilePath=$(BuildDirectoryPath)\$(Configuration)\_PublishedWebsites\%(WebProject.PackageName)\Archive.SetParameters.xml"
       Targets="AddAppPoolCredentialsParametersToSetParametersFile" />
     <!-- Delete the 'PackageTempDir' so we don't leave artefacts on the file system. -->
     <RemoveDir

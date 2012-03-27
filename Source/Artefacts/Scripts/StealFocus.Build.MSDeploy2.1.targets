@@ -32,7 +32,7 @@
       seems this is a known issue with MSDeploy). The "system.webServer/httpErrors" section takes the default values anyway.
     -->
     <ItemGroup>
-      <WebPackageArchiveXmlFile Include="$(BuildDirectoryPath)\**\*_Package\Archive\archive.xml" />
+      <WebPackageArchiveXmlFile Include="$(BuildDirectoryPath)\**\Archive\archive.xml" />
     </ItemGroup>
     <Message
       Importance="high"

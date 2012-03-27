@@ -61,6 +61,7 @@
       <Package>true</Package>
       <PackageAsSingleFile>false</PackageAsSingleFile>
       <PackageTempDir>$(SystemDrive)\AcmePetShopPackages\Acme.PetShop.Web.UI</PackageTempDir>
+      <PackageName>Acme.PetShop.Web.UI_Package</PackageName>
       <IncludeIisSettings>true</IncludeIisSettings>
       <IncludeAppPool>true</IncludeAppPool>
       <DeployEncryptKey>Password1</DeployEncryptKey>
@@ -121,6 +122,7 @@
       <!-- PipelineMode = Integrated | Classic -->
       <PipelineMode>Integrated</PipelineMode>
       <Enable32BitAppOnWin64>false</Enable32BitAppOnWin64>
+      <Delete>false</Delete>
     </WebApplicationPool>
     <WebApplicationPool Include="Acme.PetShop.Web.Services">
       <!-- IdentityType = LocalSystem | LocalService | NetworkService | SpecificUser -->
@@ -134,6 +136,7 @@
       <!-- PipelineMode = Integrated | Classic -->
       <PipelineMode>Integrated</PipelineMode>
       <Enable32BitAppOnWin64>false</Enable32BitAppOnWin64>
+      <Delete>true</Delete>
     </WebApplicationPool>
     <WebApplicationPool Include="Acme.PetShop.Web.UI">
       <!-- IdentityType = LocalSystem | LocalService | NetworkService | SpecificUser -->
@@ -147,6 +150,7 @@
       <!-- PipelineMode = Integrated | Classic -->
       <PipelineMode>Integrated</PipelineMode>
       <Enable32BitAppOnWin64>false</Enable32BitAppOnWin64>
+      <Delete>true</Delete>
     </WebApplicationPool>
   </ItemGroup>
 
@@ -162,6 +166,7 @@
       <WindowsAuthentication>true</WindowsAuthentication>
       <ClearDefaultDocuments>true</ClearDefaultDocuments>
       <DefaultDocumentName>default.html</DefaultDocumentName>
+      <Delete>true</Delete>
     </WebSite>
     <WebSite Include="$(SolutionDirectoryPath)\WebSite2">
       <Name>AcmeWebSite2</Name>
@@ -173,6 +178,7 @@
       <WindowsAuthentication>true</WindowsAuthentication>
       <ClearDefaultDocuments>true</ClearDefaultDocuments>
       <DefaultDocumentName>default.html</DefaultDocumentName>
+      <Delete>true</Delete>
     </WebSite>
   </ItemGroup>
 
@@ -198,7 +204,7 @@
     <!-- Add "WebApplication" items as required. These will create web applications in IIS with the provided settings. -->
     <WebApplication Include="$(SolutionDirectoryPath)\Acme.PetShop.Web.Services">
       <Name>Acme.PetShop.Web.Services</Name>
-      <WebSiteName>Default Web Site</WebSiteName>
+      <WebSiteName>AcmeWebSite</WebSiteName>
       <WebApplicationPoolName>Acme.PetShop.Web.Services</WebApplicationPoolName>
       <AnonymousAuthentication>true</AnonymousAuthentication>
       <BasicAuthentication>false</BasicAuthentication>
@@ -206,10 +212,11 @@
       <WindowsAuthentication>false</WindowsAuthentication>
       <ClearDefaultDocuments>true</ClearDefaultDocuments>
       <DefaultDocumentName>default.html</DefaultDocumentName>
+      <Delete>false</Delete>
     </WebApplication>
     <WebApplication Include="$(SolutionDirectoryPath)\Acme.PetShop.Web.UI">
       <Name>Acme.PetShop.Web.UI</Name>
-      <WebSiteName>Default Web Site</WebSiteName>
+      <WebSiteName>AcmeWebSite</WebSiteName>
       <WebApplicationPoolName>Acme.PetShop.Web.UI</WebApplicationPoolName>
       <AnonymousAuthentication>true</AnonymousAuthentication>
       <BasicAuthentication>false</BasicAuthentication>
@@ -217,10 +224,11 @@
       <WindowsAuthentication>false</WindowsAuthentication>
       <ClearDefaultDocuments>true</ClearDefaultDocuments>
       <DefaultDocumentName>default.html</DefaultDocumentName>
+      <Delete>false</Delete>
     </WebApplication>
-    <!--<WebApplication Include="$(SolutionDirectoryPath)\Acme.PetShop.Web.UI">
-      <Name>Acme.PetShop.Web.UI</Name>
-      <WebSiteName>AcmeWebSite</WebSiteName>
+    <WebApplication Include="$(SolutionDirectoryPath)\Acme.PetShop.Web.UI">
+      <Name>Acme.PetShop.Web.UI2</Name>
+      <WebSiteName>AcmeWebSite2</WebSiteName>
       <WebApplicationPoolName>Acme.PetShop.Web.UI</WebApplicationPoolName>
       <AnonymousAuthentication>false</AnonymousAuthentication>
       <BasicAuthentication>false</BasicAuthentication>
@@ -228,7 +236,8 @@
       <WindowsAuthentication>true</WindowsAuthentication>
       <ClearDefaultDocuments>true</ClearDefaultDocuments>
       <DefaultDocumentName>default.html</DefaultDocumentName>
-    </WebApplication>-->
+      <Delete>false</Delete>
+    </WebApplication>
   </ItemGroup>
   
   <ItemGroup>

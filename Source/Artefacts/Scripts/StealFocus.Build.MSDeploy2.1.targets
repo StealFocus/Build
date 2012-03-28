@@ -408,7 +408,7 @@
 
   <Target Name="MSDeploy">
     <MSBuild
-      Condition=" '$(BranchName)'=='%(MSDeployAction.RequiredBranchName)' "
+      Condition=" '$(BranchName)'=='%(MSDeployAction.RequiredBranchName)' And ( '$(BuildName)'=='%(MSDeployAction.RequiredBuildName)' Or ''=='%(MSDeployAction.RequiredBuildName)' ) "
       Projects="$(MSBuildProjectFile)"
       Targets="RunMSDeploy"
       Properties="

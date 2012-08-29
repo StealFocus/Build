@@ -21,12 +21,13 @@
     <MSDeployVersion>2.1</MSDeployVersion>
   </PropertyGroup>
 
+  <!-- To Do: Issue here as 'VisualStudioVersion' is a reserved property and defaults to '10.0' (for VS2010). -->
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
     <VisualStudioVersion>2010</VisualStudioVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(MSTestVersion)' == '' ">
-    <MSTestVersion>$(VisualStudioVersion)</MSTestVersion>
+    <MSTestVersion>2010</MSTestVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(MaxBuildTimeInMinutes)'=='' ">

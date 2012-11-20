@@ -26,7 +26,7 @@
     <Copy
       Condition=" '$(IsDesktopBuild)'!='true' And '$(BranchName)'=='Master' "
       SourceFiles="@(NuGetPackages)"
-      DestinationFolder="\\IP-0A3AE60A\NuGetPackages\" />
+      DestinationFolder="\\IP-0A3A46D1\NuGetPackages\" />
     <!-- Push non-Trunk builds to NuGet.org feed -->
     <Exec
       Condition=" '$(IsDesktopBuild)'!='true' And '$(BranchName)'!='Master' "

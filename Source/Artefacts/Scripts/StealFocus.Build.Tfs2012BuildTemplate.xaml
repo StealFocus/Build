@@ -114,10 +114,11 @@
       <If Condition="[(Not String.IsNullOrEmpty(BuildDetail.DropLocationRoot)) AndAlso (BuildDetail.Reason And Microsoft.TeamFoundation.Build.Client.BuildReason.Triggered) = BuildDetail.Reason]" DisplayName="If Build Reason is Triggered" mtbwt:BuildTrackingParticipant.Importance="Low">
         <If.Then>
           <Sequence mtbwt:BuildTrackingParticipant.Importance="None">
-            <Assign x:TypeArguments="x:String" mtbwt:BuildTrackingParticipant.Importance="None" Value="[BuildDropProvider.CombinePaths(BuildDetail.DropLocationRoot, BuildDetail.BuildDefinition.Name, BuildDetail.BuildNumber)]" To="[DropLocation]" />
             <!-- Steal Focus: Replace the setting of the drop location.
+            <Assign x:TypeArguments="x:String" mtbwt:BuildTrackingParticipant.Importance="None" Value="[BuildDropProvider.CombinePaths(BuildDetail.DropLocationRoot, BuildDetail.BuildDefinition.Name, BuildDetail.BuildNumber)]" To="[DropLocation]" />
             <mtbwa:SetBuildProperties DisplayName="Set Drop Location" DropLocation="[DropLocation]" PropertiesToSet="DropLocation" mtbwt:BuildTrackingParticipant.Importance="Low" />
             -->
+            <Assign x:TypeArguments="x:String" mtbwt:BuildTrackingParticipant.Importance="None" Value="[BuildDetail.DropLocationRoot + &quot;\&quot; + BranchName + &quot;\&quot; + VersionNumber]" To="[DropLocation]" />
             <mtbwa:SetBuildProperties DisplayName="Set Drop Location" DropLocation="[BuildDetail.DropLocationRoot + &quot;\&quot; + BranchName + &quot;\&quot; + VersionNumber]" PropertiesToSet="DropLocation" mtbwt:BuildTrackingParticipant.Importance="Low" />
           </Sequence>
         </If.Then>

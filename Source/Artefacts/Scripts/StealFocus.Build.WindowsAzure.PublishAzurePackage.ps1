@@ -1,8 +1,7 @@
 ﻿param
 (
 	[string]$currentDirectory = $(throw '$currentDirectory is a required parameter'),
-	[string]$subscriptionId = $(throw "subscriptionId is required"),
-	[string]$managementCertificateThumbprint = $(throw "managementCertificateThumbprint is required"),
+	[string]$subscriptionName = $(throw "subscriptionName is required"),
 	[string]$affinityGroupName = $(throw "affinityGroupName is required"),
 	[string]$hostedServiceName = $(throw "hostedServiceName is required"),
 	[string]$hostedServiceLabel = $(throw "hostedServiceLabel is required"),
@@ -19,9 +18,6 @@
 
 Import-Module $currentDirectory\StealFocus.Build.WindowsAzure.psm1 -DisableNameChecking
 
-$managementCertificate = Get-ManagementCertificate -managementCertificateThumbprint $managementCertificateThumbprint
-$affinityGroup = Get-AffinityGroup -Name $affinityGroupName -SubscriptionId $subscriptionId -Certificate $managementCertificate
-$hostedService = Create-HostedService -subscriptionId $subscriptionId -managementCertificate $managementCertificate -hostedServiceName $hostedServiceName -hostedServiceLabel $hostedServiceLabel -affinityGroupName $affinityGroupName
-$storageAccount = Get-StorageAccount -SubscriptionId $subscriptionId -Certificate $managementCertificate | where { $_.ServiceName -eq $storageAccountName }
-Delete-StagingEnvironment -hostedService $hostedService
-Create-Deployment -hostedService $hostedService -packageFilePath $packageFilePath -configurationFilePath $configurationFilePath -deploymentLabel $deploymentLabel -storageAccountName $storageAccountName -promoteToProductionEnvironment $promoteToProductionEnvironmentValue -removeStagingEnvironmentAfterwards $removeStagingEnvironmentAfterwardsValue
+$hostedService = Create-AzureHostedService -subscriptionName $subscriptionName -hostedServiceName $hostedServiceName -hostedServiceLabel $hostedServiceLabel -affinityGroupName $affinityGroupName
+Delete-AzureHostedServiceDeployment -subscriptionName $subscriptionName -hostedServiceName $hostedServiceName -hostedServiceDeploymentSlot "Staging"
+Create-AzureHostedServiceDeployment -subscriptionName $subscriptionName -packageFilePath $packageFilePath -configurationFilePath $configurationFilePath -deploymentLabel $deploymentLabel -hostedServiceName $hostedServiceName -storageAccountName $storageAccountName -promoteToProductionEnvironment $promoteToProductionEnvironmentValue -removeStagingEnvironmentAfterwards $removeStagingEnvironmentAfterwardsValue

@@ -1,11 +1,12 @@
-﻿if ((Get-PSSnapin | ?{$_.Name -eq "WAPPSCmdlets"}) -eq $null)
+﻿if ((Get-Module | ?{$_.Name -eq "Azure"}) -eq $null)
 {
-	Add-PSSnapin WAPPSCmdlets -erroraction SilentlyContinue
-	$SnapIn = Get-PSSnapIn WAPPSCmdlets -erroraction SilentlyContinue
-	if ($SnapIn -eq $null)
+	$programFilesX86EnvironmentVariable = Get-Childitem env:"ProgramFiles(x86)"
+	$azureModulePath = $programFilesX86EnvironmentVariable.Value + "\Microsoft SDKs\Windows Azure\PowerShell\Azure\Azure.psd1"
+	Import-Module $azureModulePath -erroraction SilentlyContinue
+	$azureModule = Get-Module Azure -erroraction SilentlyContinue
+	if ($azureModule -eq $null)
 	{
-		Write-Error "To run this script the 'Windows Azure Platform PowerShell Cmdlets ' are required."
-		Write-Error "Please download from 'http://wappowershell.codeplex.com/' and install as a PowerShell Snap-in (not as a Module)."
+		Write-Error "To run this script the 'Windows Azure PowerShell' component is required. Please download and install via the Microsoft Web Platform installer ('http://www.microsoft.com/web/downloads/platform.aspx')."
 		Exit
 	}
 }
@@ -20,30 +21,65 @@ function Get-ManagementCertificate
 	{
 		$certificate = (Get-Item cert:\CurrentUser\MY\$managementCertificateThumbprint)
 	}
-	else
+	elseif ((Test-Path cert:\LocalMachine\MY\$managementCertificateThumbprint) -eq $true)
 	{
 		$certificate = (Get-Item cert:\LocalMachine\MY\$managementCertificateThumbprint)
+	}
+	else
+	{
+		Write-Error "Could not find Management Certificate matching thumbprint $managementCertificateThumbprint"
 	}
 
 	return $certificate
 }
 
-function Create-AffinityGroup
+function Create-AzureSubscription
 {
 	param( 
+			[string]$subscriptionName = $(throw '$subscriptionName is a required parameter'),
 			[string]$subscriptionId = $(throw '$subscriptionId is a required parameter'),
-			[System.Security.Cryptography.X509Certificates.X509Certificate2]$managementCertificate = $(throw '$managementCertificate is a required parameter'),
+			[string]$managementCertificateThumbprint = $(throw '$managementCertificateThumbprint is a required parameter')
+		)
+	
+	$azureSubscription = Get-AzureSubscription -subscriptionName $subscriptionName
+	if ($azureSubscription -eq $null)
+	{
+		$certificate = Get-ManagementCertificate -managementCertificateThumbprint $managementCertificateThumbprint
+		Set-AzureSubscription -SubscriptionName $subscriptionName -Certificate $certificate -SubscriptionId $subscriptionId
+	}
+	elseif ($azureSubscription.SubscriptionId.ToUpper() -ne $subscriptionId.ToLower())
+	{
+		Write-Error "An Azure Subscription existed but the Subscription ID did not match that of the new subscription."
+	}
+	else
+	{
+		Write-Host "An Azure Subscription already existed with that name and Subscription ID."
+	}
+
+	Select-AzureSubscription -SubscriptionName $subscriptionName
+}
+
+function Create-AzureAffinityGroup
+{
+	param( 
+			[string]$subscriptionName = $(throw '$subscriptionName is a required parameter'),
 			[string]$affinityGroupName = $(throw '$affinityGroupName is a required parameter'),
 			[string]$affinityGroupLabel = $(throw '$affinityGroupLabel is a required parameter'),
 			[string]$affinityGroupLocation = $(throw '$affinityGroupLocation is a required parameter')
 		)
 	
-	$affinityGroup = Get-AffinityGroups -SubscriptionId $subscriptionId -Certificate $managementCertificate | where {$_.Name -eq $affinityGroupName}
+	Select-AzureSubscription $subscriptionName
+	$affinityGroup = Get-AzureAffinityGroup | where {$_.Name -eq $affinityGroupName}
 	if ($affinityGroup -eq $null)
 	{
 		Write-Host "Creating new Windows Azure Affinity Group with name ""$affinityGroupName"""
-		New-AffinityGroup -Name $affinityGroupName -Label $affinityGroupLabel -Location $affinityGroupLocation -SubscriptionId $subscriptionId -Certificate $managementCertificate | Get-OperationStatus -WaitToComplete
+		$operation = New-AzureAffinityGroup -Name $affinityGroupName -Description $affinityGroupLabel -Label $affinityGroupLabel -Location $affinityGroupLocation
 		Write-Host "`n"
+	}
+	elseif ($affinityGroup.Location -ne $affinityGroupLocation)
+	{
+		$existingAffinityGroupLocation = $affinityGroup.Location
+		Write-Error "An Affinity Group named ""$affinityGroupName"" already exists but is in the location ""$existingAffinityGroupLocation"" when the requested location was ""$affinityGroupLocation""."
 	}
 	else
 	{
@@ -54,22 +90,22 @@ function Create-AffinityGroup
 	return $affinityGroup
 }
 
-function Create-HostedService
+function Create-AzureHostedService
 {
 	param( 
-			[string]$subscriptionId = $(throw '$subscriptionId is a required parameter'),
-			[System.Security.Cryptography.X509Certificates.X509Certificate2]$managementCertificate = $(throw '$managementCertificate is a required parameter'),
+			[string]$subscriptionName = $(throw '$subscriptionName is a required parameter'),
 			[string]$hostedServiceName = $(throw '$hostedServiceName is a required parameter'),
 			[string]$hostedServiceLabel = $(throw '$hostedServiceLabel is a required parameter'),
 			[string]$affinityGroupName = $(throw '$affinityGroupName is a required parameter')
 		)
 	
-	$hostedService = Get-HostedServices -SubscriptionId $subscriptionId -Certificate $managementCertificate | where {$_.ServiceName -eq $hostedServiceName}
-	if ($hostedService -eq $null)
+	Select-AzureSubscription $subscriptionName
+	$service = Get-AzureService | where {$_.ServiceName -eq $hostedServiceName}
+	if ($service -eq $null)
 	{
 		Write-Host "Creating new Windows Azure Hosted Service with name ""$hostedServiceName"""
-		New-HostedService -ServiceName $hostedServiceName -Label $hostedServiceLabel -AffinityGroup $affinityGroupName -SubscriptionId $subscriptionId -Certificate $managementCertificate | Get-OperationStatus -WaitToComplete
-		$hostedService = Get-HostedService -ServiceName $hostedServiceName -SubscriptionId $subscriptionId -Certificate $managementCertificate
+		$operation = New-AzureService -ServiceName $hostedServiceName -Label $hostedServiceLabel -AffinityGroup $affinityGroupName
+		$service = Get-AzureService -ServiceName $hostedServiceName
 		Write-Host "`n"
 	}
 	else
@@ -78,24 +114,24 @@ function Create-HostedService
 		Write-Host "`n"
 	}
 
-	return Get-HostedService -ServiceName $hostedServiceName -SubscriptionId $subscriptionId -Certificate $managementCertificate
+	return $service
 }
 
-function Create-StorageAccount
+function Create-AzureStorageAccount
 {
 	param( 
-			[string]$subscriptionId = $(throw '$subscriptionId is a required parameter'),
-			[System.Security.Cryptography.X509Certificates.X509Certificate2]$managementCertificate = $(throw '$managementCertificate is a required parameter'),
+			[string]$subscriptionName = $(throw '$subscriptionName is a required parameter'),
 			[string]$storageAccountName = $(throw '$storageAccountName is a required parameter'),
 			[string]$storageAccountLabel = $(throw '$storageAccountLabel is a required parameter'),
 			[string]$affinityGroupName = $(throw '$affinityGroupName is a required parameter')
 		)
 	
-	$storageAccount = Get-StorageAccount -SubscriptionId $subscriptionId -Certificate $managementCertificate | where {$_.ServiceName -eq $storageAccountName}
+	Select-AzureSubscription $subscriptionName
+	$storageAccount = Get-AzureStorageAccount | where {$_.StorageAccountName -eq $storageAccountName}
 	if ($storageAccount -eq $null)
 	{
 		Write-Host "Creating new Windows Azure Storage Account with name ""$storageAccountName"""
-		New-StorageAccount -ServiceName $storageAccountName -Label $storageAccountLabel -AffinityGroup $affinityGroupName -SubscriptionId $subscriptionId -Certificate $managementCertificate | Get-OperationStatus -WaitToComplete
+		$storageAccount = New-AzureStorageAccount -StorageAccountName $storageAccountName -Label $storageAccountLabel -AffinityGroup $affinityGroupName
 		Write-Host "`n"
 	}
 	else
@@ -107,72 +143,119 @@ function Create-StorageAccount
 	return $storageAccount
 }
 
-function Delete-StagingEnvironment
+function Get-AzureHostedServiceDeploymentIsReady
 {
 	param(
-			[Microsoft.WindowsAzure.Samples.ManagementTools.PowerShell.Services.Model.HostedServiceContext]$hostedService = $(throw '$hostedService is a required parameter')
+			[string]$hostedServiceName = $(throw '$hostedServiceName is a required parameter'),
+			[string]$hostedServiceDeploymentSlot = $(throw '$hostedServiceDeploymentSlot is a required parameter')
 		)
 
-	if (($hostedService | Get-Deployment Staging).DeploymentId -ne $null)
+	$hostedServiceDeploymentSlotStatus = Get-AzureDeployment -ServiceName $hostedServiceName -Slot $hostedServiceDeploymentSlot
+    if (-not $($hostedServiceDeploymentSlotStatus.Status -eq "Running"))
 	{
-		Write-Host "Suspending legacy Staging Environment Deployment (required to accomodate new Deployment)"
-		$hostedService | Get-Deployment -Slot Staging | Set-DeploymentStatus Suspended | Get-OperationStatus -WaitToComplete
-		Write-Host "`n"
+        Write-Host $("Deployment slot status is not Running. Value is " + $hostedServiceDeploymentSlotStatus.Running)
+        return $False
+    }
 
-		Write-Host "Deleting legacy Staging Environment Deployment (required to accomodate new Deployment)"
-		$hostedService | Get-Deployment -Slot Staging | Remove-Deployment | Get-OperationStatus -WaitToComplete
+    if (-not $hostedServiceDeploymentSlotStatus.RoleInstanceList)
+	{
+        Write-Host "Deployment slot has no instances configured yet."
+        return $False
+    }
+
+    $notReady = $False
+
+    Foreach ($roleInstance in $hostedServiceDeploymentSlotStatus.RoleInstanceList)
+	{
+        if (-not $($roleInstance.InstanceStatus -eq "ReadyRole"))
+		{
+            Write-Host $("Deployment slot instance " + $roleInstance.InstanceName + " has status " + $roleInstance.InstanceStatus)
+            $notReady = $True
+        }
+    }
+
+    if ($notReady)
+	{
+        Write-Host "One or more deployment instances are not yet running."
+        return $False
+    }
+
+    Write-Host "Deployment slot ready for use."
+    return $True
+}
+
+function Wait-AzureHostedServiceDeploymentIsReady
+{
+	param(
+			[string]$hostedServiceName = $(throw '$hostedServiceName is a required parameter'),
+			[string]$hostedServiceDeploymentSlot = $(throw '$hostedServiceDeploymentSlot is a required parameter')
+		)
+	
+	while ( -not $(Get-AzureHostedServiceDeploymentIsReady -hostedServiceName $hostedServiceName -hostedServiceDeploymentSlot $hostedServiceDeploymentSlot) ) 
+	{
+        Write-Host "Deployment slot not ready, waiting 10 seconds for instances."
+        Start-Sleep -s 10
+    }
+}
+
+function Delete-AzureHostedServiceDeployment
+{
+	param(
+			[string]$subscriptionName = $(throw '$subscriptionName is a required parameter'),
+			[string]$hostedServiceName = $(throw '$hostedServiceName is a required parameter'),
+			[string]$hostedServiceDeploymentSlot = $(throw '$hostedServiceDeploymentSlot is a required parameter')
+		)
+		
+	Select-AzureSubscription $subscriptionName
+	$deployment = Get-AzureDeployment -ServiceName $hostedServiceName -Slot $hostedServiceDeploymentSlot -errorAction "SilentlyContinue"
+	if ($deployment -eq $null)
+	{
+		Write-Host "No existing $hostedServiceDeploymentSlot Environment Deployment for $hostedServiceName"
 		Write-Host "`n"
 	}
 	else
 	{
-		Write-Host "No existing Staging Environment Deployment"
-		Write-Host "`n"
+		$operation = Remove-AzureDeployment -ServiceName $hostedServiceName -Slot $hostedServiceDeploymentSlot -Force
 	}
 }
 
-function Create-Deployment
+function Create-AzureHostedServiceDeployment
 {
 	param(
-			[Microsoft.WindowsAzure.Samples.ManagementTools.PowerShell.Services.Model.HostedServiceContext]$hostedService = $(throw '$hostedService is a required parameter'),
+			[string]$subscriptionName = $(throw '$subscriptionName is a required parameter'),
 			[string]$packageFilePath = $(throw '$packageFilePath is a required parameter'),
 			[string]$configurationFilePath = $(throw '$configurationFilePath is a required parameter'),
 			[string]$deploymentLabel = $(throw '$deploymentLabel is a required parameter'),
+			[string]$hostedServiceName = $(throw '$hostedServiceName is a required parameter'),
 			[string]$storageAccountName = $(throw '$storageAccountName is a required parameter'),
 			[bool]$promoteToProductionEnvironment = $(throw '$promoteToProductionEnvironment is a required parameter'),
 			[bool]$removeStagingEnvironmentAfterwards = $(throw '$removeStagingEnvironmentAfterwards is a required parameter')
 		)
 
+	Set-AzureSubscription $subscriptionName -CurrentStorageAccount $storageAccountName
 	Write-Host "Creating a Deployment to Staging Environment using Package from ""$packageFilePath"" and Configuration from ""$configurationFilePath"" with label ""$deploymentLabel"""
-	$hostedService | New-Deployment -Slot Staging -StorageServiceName $storageAccountName -Package $packageFilePath -Configuration $configurationFilePath -Label $deploymentLabel | Get-OperationStatus -WaitToComplete
+	New-AzureDeployment -ServiceName $hostedServiceName -Slot "Staging" -Package $packageFilePath -Configuration $configurationFilePath -Label $deploymentLabel
 	Write-Host "`n"
-
-	Write-Host "Starting the Deployment on Staging Environment"
-	$hostedService | Get-Deployment -Slot Staging | Set-DeploymentStatus -Status Running | Get-OperationStatus -WaitToComplete
-	Write-Host "`n"
-
 	if ($promoteToProductionEnvironment)
 	{
 		Write-Host "VIP swapping the Deployment from Staging Environment to Production Environment (""PromoteToProductionEnvironment"" specified as true)"
-		$hostedService | Get-Deployment -Slot Staging | Move-Deployment | Get-OperationStatus -WaitToComplete
-		Write-Host "`n"
-	}
-
-	if ($promoteToProductionEnvironment -and $removeStagingEnvironmentAfterwards)
-	{
-		$deployment = $hostedService | Get-Deployment -Slot Staging
-		if ($deployment.DeploymentId -eq $null)
+		#Wait-AzureHostedServiceDeploymentIsReady -hostedServiceName $hostedServiceName -hostedServiceDeploymentSlot "Staging"
+		#Move-AzureDeployment $hostedServiceName
+		#Write-Host "`n"
+		# Workaround until "Move-AzureDeployment" works as advertised.
+		$deployment = Get-AzureDeployment -ServiceName $hostedServiceName -Slot "Production" -errorAction "SilentlyContinue"
+		if ($deployment -eq $null)
 		{
-			Write-Host "Skipping suspending and deleting Staging Environment Deployment (""PromoteToProductionEnvironment"" specified as true and ""RemoveStagingEnvironmentAfterwards"" specified as true) as no Staging Environment Deployment existed"
-			Write-Host "`n"
+			New-AzureDeployment -ServiceName $hostedServiceName -Slot "Production" -Package $packageFilePath -Configuration $configurationFilePath -Label $deploymentLabel
 		}
 		else
 		{
-			Write-Host "Suspending Staging Environment Deployment (""PromoteToProductionEnvironment"" specified as true and ""RemoveStagingEnvironmentAfterwards"" specified as true)"
-			$deployment | Set-DeploymentStatus Suspended | Get-OperationStatus -WaitToComplete
-			Write-Host "`n"
-			Write-Host "Deleting Staging Environment Deployment (""PromoteToProductionEnvironment"" specified as true and ""RemoveStagingEnvironmentAfterwards"" specified as true)"
-			$deployment | Remove-Deployment | Get-OperationStatus -WaitToComplete
-			Write-Host "`n"
+			Move-AzureDeployment $hostedServiceName
+		}
+		
+		if ($removeStagingEnvironmentAfterwards)
+		{
+			Delete-AzureHostedServiceDeployment -subscriptionName $subscriptionName -hostedServiceName $hostedServiceName -hostedServiceDeploymentSlot "Staging"
 		}
 	}
 }

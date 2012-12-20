@@ -32,6 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{CCD2
 		Artefacts\Scripts\StealFocus.Build.ValidatePrerequisites.ps1 = Artefacts\Scripts\StealFocus.Build.ValidatePrerequisites.ps1
 		Artefacts\Scripts\StealFocus.Build.WindowsAzure.CreateAzureAffinityGroup.ps1 = Artefacts\Scripts\StealFocus.Build.WindowsAzure.CreateAzureAffinityGroup.ps1
 		Artefacts\Scripts\StealFocus.Build.WindowsAzure.CreateAzureStorageAccount.ps1 = Artefacts\Scripts\StealFocus.Build.WindowsAzure.CreateAzureStorageAccount.ps1
+		Artefacts\Scripts\StealFocus.Build.WindowsAzure.CreateAzureSubscription.ps1 = Artefacts\Scripts\StealFocus.Build.WindowsAzure.CreateAzureSubscription.ps1
 		Artefacts\Scripts\StealFocus.Build.WindowsAzure.psm1 = Artefacts\Scripts\StealFocus.Build.WindowsAzure.psm1
 		Artefacts\Scripts\StealFocus.Build.WindowsAzure.PublishAzurePackage.ps1 = Artefacts\Scripts\StealFocus.Build.WindowsAzure.PublishAzurePackage.ps1
 		Artefacts\Scripts\StealFocus.Build.WindowsAzure.targets = Artefacts\Scripts\StealFocus.Build.WindowsAzure.targets

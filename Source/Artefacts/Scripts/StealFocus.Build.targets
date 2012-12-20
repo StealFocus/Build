@@ -987,6 +987,10 @@
       Targets="Deploy" />
     <MSBuild
       Projects="$(MSBuildProjectFile)"
+      Targets="CreateAzureSubscriptions"
+      Properties="DeployForTestStage=true" />
+    <MSBuild
+      Projects="$(MSBuildProjectFile)"
       Targets="CreateAzureAffinityGroups"
       Properties="DeployForTestStage=true" />
     <MSBuild
@@ -1131,6 +1135,10 @@
 
   <Target Name="CoreEnvironmentDeploy">
     <CallTarget Targets="MSDeploy" />
+    <MSBuild
+      Projects="$(MSBuildProjectFile)"
+      Targets="CreateAzureSubscriptions"
+      Properties="DeployForTestStage=false" />
     <MSBuild
       Projects="$(MSBuildProjectFile)"
       Targets="CreateAzureAffinityGroups"

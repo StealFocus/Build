@@ -11,7 +11,7 @@
   <Target Name="CreateAzureSubscriptions">
     <Error
       Condition=" '$(DeployForTestStage)'=='' "
-      Text="Please supply a 'DeployForTestStage' property." />
+      Text="Please supply a 'DeployForTestStage' property (as 'true' or 'false')." />
     <CreateProperty
       Condition=" ( '%(AzurePublishAction.DeployForTest)'=='true' And '$(DeployForTestStage)'=='true' ) Or ( '$(DeployForTestStage)'=='false' ) "
       Value="true">
@@ -28,7 +28,7 @@
   <Target Name="CreateAzureAffinityGroups">
     <Error
       Condition=" '$(DeployForTestStage)'=='' "
-      Text="Please supply a 'DeployForTestStage' property." />
+      Text="Please supply a 'DeployForTestStage' property (as 'true' or 'false')." />
     <CreateProperty
       Condition=" ( '%(AzurePublishAction.DeployForTest)'=='true' And '$(DeployForTestStage)'=='true' ) Or ( '$(DeployForTestStage)'=='false' ) "
       Value="true">
@@ -45,7 +45,7 @@
   <Target Name="CreateAzureStorageAccounts">
     <Error
       Condition=" '$(DeployForTestStage)'=='' "
-      Text="Please supply a 'DeployForTestStage' property." />
+      Text="Please supply a 'DeployForTestStage' property (as 'true' or 'false')." />
     <CreateProperty
       Condition=" ( '%(AzurePublishAction.DeployForTest)'=='true' And '$(DeployForTestStage)'=='true' ) Or ( '$(DeployForTestStage)'=='false' ) "
       Value="true">
@@ -62,20 +62,16 @@
   <Target Name="PublishAzurePackages">
     <Error
       Condition=" '$(DeployForTestStage)'=='' "
-      Text="Please supply a 'DeployForTestStage' property." />
+      Text="Please supply a 'DeployForTestStage' property (as 'true' or 'false')." />
     <CreateProperty
-      Condition=" ( '%(AzurePublishAction.DeployForTest)'=='true' And '$(DeployForTestStage)'=='true' ) Or ( '%(AzurePublishAction.RequiredBranchName)'=='$(BranchName)' And ( '$(BuildName)'=='%(AzurePublishAction.RequiredBuildName)' Or ''=='%(AzurePublishAction.RequiredBuildName)' ) And '$(DeployForTestStage)'=='false' ) "
+      Condition=" ( '%(AzurePublishAction.DeployForTest)'=='true' And '$(DeployForTestStage)'=='true' ) Or ( ( '$(BranchName)'=='%(AzurePublishAction.RequiredBranchName)' Or ''=='%(AzurePublishAction.RequiredBranchName)' ) And ( '$(BuildName)'=='%(AzurePublishAction.RequiredBuildName)' Or ''=='%(AzurePublishAction.RequiredBuildName)' ) And '$(DeployForTestStage)'=='false' ) "
       Value="true">
       <Output
         TaskParameter="Value"
         PropertyName="AzurePublish" />
     </CreateProperty>
     <Exec
-      Condition=" '%(AzurePublishAction.DeployForTest)'=='true' And '$(DeployForTestStage)'=='true' "
-      Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File $(MSBuildThisFileDirectory)\StealFocus.Build.WindowsAzure.PublishAzurePackage.ps1 -currentDirectory $(MSBuildThisFileDirectory) -subscriptionName %22%(AzurePublishAction.SubscriptionName)%22 -affinityGroupName %22%(AzurePublishAction.AffinityGroupName)%22 -hostedServiceName %22%(AzurePublishAction.HostedServiceName)%22 -hostedServiceLabel %22%(AzurePublishAction.HostedServiceLabel)%22 -storageAccountName %22%(AzurePublishAction.StorageAccountName)%22 -packageFilePath %22%(AzurePublishAction.PackageFilePath)%22 -configurationFilePath %22%(AzurePublishAction.ConfigurationFilePath)%22 -deploymentLabel %22%(AzurePublishAction.DeploymentLabel)%22 -removeStagingEnvironmentAfterwards %(AzurePublishAction.RemoveStagingEnvironmentAfterwards) -promoteToProductionEnvironment %(AzurePublishAction.PromoteToProductionEnvironment)"
-      WorkingDirectory="." />
-    <Exec
-      Condition=" '%(AzurePublishAction.RequiredBranchName)'=='$(BranchName)' And ( '$(BuildName)'=='%(AzurePublishAction.RequiredBuildName)' Or ''=='%(AzurePublishAction.RequiredBuildName)' ) And '$(DeployForTestStage)'=='false' "
+      Condition=" '$(AzurePublish)'=='true' "
       Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File $(MSBuildThisFileDirectory)\StealFocus.Build.WindowsAzure.PublishAzurePackage.ps1 -currentDirectory $(MSBuildThisFileDirectory) -subscriptionName %22%(AzurePublishAction.SubscriptionName)%22 -affinityGroupName %22%(AzurePublishAction.AffinityGroupName)%22 -hostedServiceName %22%(AzurePublishAction.HostedServiceName)%22 -hostedServiceLabel %22%(AzurePublishAction.HostedServiceLabel)%22 -storageAccountName %22%(AzurePublishAction.StorageAccountName)%22 -packageFilePath %22%(AzurePublishAction.PackageFilePath)%22 -configurationFilePath %22%(AzurePublishAction.ConfigurationFilePath)%22 -deploymentLabel %22%(AzurePublishAction.DeploymentLabel)%22 -removeStagingEnvironmentAfterwards %(AzurePublishAction.RemoveStagingEnvironmentAfterwards) -promoteToProductionEnvironment %(AzurePublishAction.PromoteToProductionEnvironment)"
       WorkingDirectory="." />
   </Target>

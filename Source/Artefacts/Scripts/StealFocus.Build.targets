@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project 
   DefaultTargets="Build" 
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+  ToolsVersion="4.0">
 
   <!-- 
     IMPORTANT - please do not customise this .targets file. Modifications will affect all Solutions using the software 
@@ -228,6 +229,8 @@
     <Exec
       Condition=" !Exists('$(StateFilePath)') "
       Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File $(MSBuildThisFileDirectory)\StealFocus.Build.ValidatePrerequisites.ps1 -currentDirectory $(MSBuildThisFileDirectory) -azurePublishActionRequired true"
+      LogStandardErrorAsError="true"
+      ContinueOnError="false"
       WorkingDirectory="." />
     <Message
       Importance="high"

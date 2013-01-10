@@ -6,16 +6,19 @@
 
 	if ($azurePublishActionRequired)
 	{
-		if ((Get-PSSnapin | ?{$_.Name -eq "WAPPSCmdlets"}) -eq $null)
+		$programFilesX86EnvironmentVariable = Get-Childitem env:"ProgramFiles(x86)"
+		$azureModulePath = $programFilesX86EnvironmentVariable.Value + "\Microsoft SDKs\Windows Azure\PowerShell\Azure\Azure.psd1"
+		Import-Module $azureModulePath -erroraction SilentlyContinue
+		$azureModule = Get-Module Azure -erroraction SilentlyContinue
+		if ($azureModule -eq $null)
 		{
-			Add-PSSnapin WAPPSCmdlets -erroraction SilentlyContinue
-			$SnapIn = Get-PSSnapIn WAPPSCmdlets -erroraction SilentlyContinue
-			if ($SnapIn -eq $null)
-			{
-				Write-Error "To run this script the 'Windows Azure Platform PowerShell Cmdlets ' are required."
-				Write-Error "Please download from 'http://wappowershell.codeplex.com/' and install as a PowerShell Snap-in (not as a Module)."
-				Exit
-			}
+			Write-Error "To run this script the 'Windows Azure PowerShell' component is required. Please download and install via the Microsoft Web Platform installer ('http://www.microsoft.com/web/downloads/platform.aspx')."
+			Exit
 		}
+		Write-Host "Check for 'Windows Azure PowerShell' succeeded."
+	}
+	else
+	{
+		Write-Host "No 'AzureSubscription' entries in configuration, so skipping check for 'Windows Azure PowerShell'."
 	}
 }

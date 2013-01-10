@@ -225,10 +225,19 @@
     <CallTarget
       Condition=" !Exists('$(StateFilePath)') "
       Targets="FixStyleCopOn64Bit" />
-    <!-- To Do: determine "-azurePublishActionRequired" argument dynamically. -->
+    <CreateProperty
+      Condition=" '%(AzureSubscription.Identity)'!='' "
+      Value="true">
+      <Output
+        TaskParameter="Value"
+        PropertyName="AzurePublishActionRequired" />
+    </CreateProperty>
+    <PropertyGroup Condition=" '$(AzurePublishActionRequired)'=='' ">
+      <AzurePublishActionRequired>false</AzurePublishActionRequired>
+    </PropertyGroup>
     <Exec
       Condition=" !Exists('$(StateFilePath)') "
-      Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File $(MSBuildThisFileDirectory)\StealFocus.Build.ValidatePrerequisites.ps1 -currentDirectory $(MSBuildThisFileDirectory) -azurePublishActionRequired true"
+      Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File $(MSBuildThisFileDirectory)\StealFocus.Build.ValidatePrerequisites.ps1 -currentDirectory $(MSBuildThisFileDirectory) -azurePublishActionRequired $(AzurePublishActionRequired)"
       LogStandardErrorAsError="true"
       ContinueOnError="false"
       WorkingDirectory="." />

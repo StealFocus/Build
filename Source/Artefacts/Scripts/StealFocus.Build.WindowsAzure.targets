@@ -78,7 +78,7 @@
         PropertyName="AzurePublish" />
     </CreateProperty>
     <Exec
-      Condition=" '$(AzurePublish)'=='true' "
+      Condition=" '$(AzurePublish)'=='true' And '%(AzurePublishAction.Identity)'!='' "
       Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File $(MSBuildThisFileDirectory)\StealFocus.Build.WindowsAzure.PublishAzurePackage.ps1 -currentDirectory $(MSBuildThisFileDirectory) -subscriptionName %22%(AzurePublishAction.SubscriptionName)%22 -affinityGroupName %22%(AzurePublishAction.AffinityGroupName)%22 -hostedServiceName %22%(AzurePublishAction.HostedServiceName)%22 -hostedServiceLabel %22%(AzurePublishAction.HostedServiceLabel)%22 -storageAccountName %22%(AzurePublishAction.StorageAccountName)%22 -packageFilePath %22%(AzurePublishAction.PackageFilePath)%22 -configurationFilePath %22%(AzurePublishAction.ConfigurationFilePath)%22 -deploymentLabel %22%(AzurePublishAction.DeploymentLabel)%22 -removeStagingEnvironmentAfterwards %(AzurePublishAction.RemoveStagingEnvironmentAfterwards) -promoteToProductionEnvironment %(AzurePublishAction.PromoteToProductionEnvironment)"
       LogStandardErrorAsError="true"
       ContinueOnError="false"

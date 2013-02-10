@@ -48,20 +48,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{CCD2
 		Artefacts\Scripts\StealFocus.MSBuildExtensions.Tasks.BizTalk.Targets = Artefacts\Scripts\StealFocus.MSBuildExtensions.Tasks.BizTalk.Targets
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{A858E3FC-FB16-439E-AA0C-3DF944FE7181}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{3F74F62B-55DD-4DD8-B523-51D350DD2D5E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{061734E7-FFBD-4131-80BE-E0BABB834480}"
-	ProjectSection(SolutionItems) = preProject
-		Artefacts\Example\Source\Scripts\Acme.PetShop.Build.proj = Artefacts\Example\Source\Scripts\Acme.PetShop.Build.proj
-		Artefacts\Example\Source\Scripts\Acme.PetShop.Build.Project.Assembly.targets = Artefacts\Example\Source\Scripts\Acme.PetShop.Build.Project.Assembly.targets
-		Artefacts\Example\Source\Scripts\Acme.PetShop.Build.Project.CSharp.targets = Artefacts\Example\Source\Scripts\Acme.PetShop.Build.Project.CSharp.targets
-		Artefacts\Example\Source\Scripts\Acme.PetShop.Build.Project.targets = Artefacts\Example\Source\Scripts\Acme.PetShop.Build.Project.targets
-		Artefacts\Example\Source\Scripts\Acme.PetShop.Build.Project.VisualBasic.targets = Artefacts\Example\Source\Scripts\Acme.PetShop.Build.Project.VisualBasic.targets
-		Artefacts\Example\Source\Scripts\Acme.PetShop.targets = Artefacts\Example\Source\Scripts\Acme.PetShop.targets
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StealFocus.Build", "StealFocus.Build", "{06414272-9F58-4992-8715-7557B65067D5}"
 	ProjectSection(SolutionItems) = preProject
 		Artefacts\NuGet\StealFocus.Build\StealFocus.Build.nuspec = Artefacts\NuGet\StealFocus.Build\StealFocus.Build.nuspec
@@ -72,11 +58,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Notes.txt = Notes.txt
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommandFiles", "CommandFiles", "{9C246013-472C-4AD3-AE3A-37D60BFE501D}"
-	ProjectSection(SolutionItems) = preProject
-		Artefacts\Example\Source\CommandFiles\Acme.PetShop.Build.cmd = Artefacts\Example\Source\CommandFiles\Acme.PetShop.Build.cmd
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,10 +65,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C05C9738-60B2-462D-8E03-0F3611296AC9} = {16AF1373-D90E-497F-8C67-231E5C91EEE0}
 		{CCD282DB-4EBC-45F7-BCD5-EEE614A82FB1} = {16AF1373-D90E-497F-8C67-231E5C91EEE0}
-		{A858E3FC-FB16-439E-AA0C-3DF944FE7181} = {16AF1373-D90E-497F-8C67-231E5C91EEE0}
 		{06414272-9F58-4992-8715-7557B65067D5} = {C05C9738-60B2-462D-8E03-0F3611296AC9}
-		{3F74F62B-55DD-4DD8-B523-51D350DD2D5E} = {A858E3FC-FB16-439E-AA0C-3DF944FE7181}
-		{061734E7-FFBD-4131-80BE-E0BABB834480} = {3F74F62B-55DD-4DD8-B523-51D350DD2D5E}
-		{9C246013-472C-4AD3-AE3A-37D60BFE501D} = {3F74F62B-55DD-4DD8-B523-51D350DD2D5E}
 	EndGlobalSection
 EndGlobal

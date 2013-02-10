@@ -11,7 +11,7 @@
 *.ncb
 *.obj
 *.pch
-*.pdb
+#*.pdb
 *.sbr
 *.scc
 *.suo

@@ -13,13 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{C05C9738
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{CCD282DB-4EBC-45F7-BCD5-EEE614A82FB1}"
 	ProjectSection(SolutionItems) = preProject
-		Artefacts\Scripts\StealFocus.Build.BizTalk2009.targets = Artefacts\Scripts\StealFocus.Build.BizTalk2009.targets
+		Artefacts\Scripts\StealFocus.BclExtensions.dll = Artefacts\Scripts\StealFocus.BclExtensions.dll
+		Artefacts\Scripts\StealFocus.BclExtensions.pdb = Artefacts\Scripts\StealFocus.BclExtensions.pdb
+		Artefacts\Scripts\StealFocus.BizTalkExtensions.dll = Artefacts\Scripts\StealFocus.BizTalkExtensions.dll
+		Artefacts\Scripts\StealFocus.BizTalkExtensions.pdb = Artefacts\Scripts\StealFocus.BizTalkExtensions.pdb
 		Artefacts\Scripts\StealFocus.Build.BizTalk2010.targets = Artefacts\Scripts\StealFocus.Build.BizTalk2010.targets
 		Artefacts\Scripts\StealFocus.Build.IIS7.x.targets = Artefacts\Scripts\StealFocus.Build.IIS7.x.targets
 		Artefacts\Scripts\StealFocus.Build.MSDeploy2.1.targets = Artefacts\Scripts\StealFocus.Build.MSDeploy2.1.targets
 		Artefacts\Scripts\StealFocus.Build.MSTest2010.targets = Artefacts\Scripts\StealFocus.Build.MSTest2010.targets
 		Artefacts\Scripts\StealFocus.Build.NUnit.targets = Artefacts\Scripts\StealFocus.Build.NUnit.targets
 		Artefacts\Scripts\StealFocus.Build.Project.Assembly.targets = Artefacts\Scripts\StealFocus.Build.Project.Assembly.targets
+		Artefacts\Scripts\StealFocus.Build.Project.BizTalk2010.targets = Artefacts\Scripts\StealFocus.Build.Project.BizTalk2010.targets
 		Artefacts\Scripts\StealFocus.Build.Project.CSharp.targets = Artefacts\Scripts\StealFocus.Build.Project.CSharp.targets
 		Artefacts\Scripts\StealFocus.Build.Project.targets = Artefacts\Scripts\StealFocus.Build.Project.targets
 		Artefacts\Scripts\StealFocus.Build.Project.VisualBasic.targets = Artefacts\Scripts\StealFocus.Build.Project.VisualBasic.targets
@@ -36,6 +40,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{CCD2
 		Artefacts\Scripts\StealFocus.Build.WindowsAzure.psm1 = Artefacts\Scripts\StealFocus.Build.WindowsAzure.psm1
 		Artefacts\Scripts\StealFocus.Build.WindowsAzure.PublishAzurePackage.ps1 = Artefacts\Scripts\StealFocus.Build.WindowsAzure.PublishAzurePackage.ps1
 		Artefacts\Scripts\StealFocus.Build.WindowsAzure.targets = Artefacts\Scripts\StealFocus.Build.WindowsAzure.targets
+		Artefacts\Scripts\StealFocus.MSBuildExtensions.dll = Artefacts\Scripts\StealFocus.MSBuildExtensions.dll
+		Artefacts\Scripts\StealFocus.MSBuildExtensions.pdb = Artefacts\Scripts\StealFocus.MSBuildExtensions.pdb
+		Artefacts\Scripts\StealFocus.MSBuildExtensions.Targets = Artefacts\Scripts\StealFocus.MSBuildExtensions.Targets
+		Artefacts\Scripts\StealFocus.MSBuildExtensions.Tasks.BizTalk.dll = Artefacts\Scripts\StealFocus.MSBuildExtensions.Tasks.BizTalk.dll
+		Artefacts\Scripts\StealFocus.MSBuildExtensions.Tasks.BizTalk.pdb = Artefacts\Scripts\StealFocus.MSBuildExtensions.Tasks.BizTalk.pdb
+		Artefacts\Scripts\StealFocus.MSBuildExtensions.Tasks.BizTalk.Targets = Artefacts\Scripts\StealFocus.MSBuildExtensions.Tasks.BizTalk.Targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{A858E3FC-FB16-439E-AA0C-3DF944FE7181}"

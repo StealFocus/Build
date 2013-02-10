@@ -1032,7 +1032,31 @@
   </Target>
 
   <Target Name="BeforeRunTestsForConfiguration">
-    <!-- To Do: Deploy BizTalk?-->
+    <!-- Notify user that we will skip the deployment of the current configuration to BizTalk. -->
+    <Message
+      Condition=" '$(BizTalkApplicationName)'!='' And '%(ConfigurationToBuild.FlavorToBuild)'=='$(Configuration)' And '%(ConfigurationToBuild.DeployToBizTalkApplicationForTestRun)'!='true' "
+      Importance="high"
+      Text="Skipping the deployment of '$(Configuration)' configuration to BizTalk." />
+    <!-- Notify user that we will deploy the current configuration to BizTalk and initialise the Hosts/Handlers. -->
+    <Message
+      Condition=" '$(BizTalkApplicationName)'!='' And '%(ConfigurationToBuild.FlavorToBuild)'=='$(Configuration)' And '%(ConfigurationToBuild.DeployToBizTalkApplicationForTestRun)'=='true' And '%(ConfigurationToBuild.InitialiseBizTalkHostsAndHandlers)'=='true' "
+      Importance="high"
+      Text="Deploying '$(Configuration)' configuration to BizTalk (initialising Hosts and Handlers)." />
+    <MSBuild
+      Condition=" '$(BizTalkApplicationName)'!='' And '%(ConfigurationToBuild.FlavorToBuild)'=='$(Configuration)' And '%(ConfigurationToBuild.DeployToBizTalkApplicationForTestRun)'=='true' And '%(ConfigurationToBuild.InitialiseBizTalkHostsAndHandlers)'=='true' "
+      Projects="$(MSBuildProjectFullPath)"
+      Targets="BuildBizTalkApplication"
+      Properties="SolutionConfigurationToDeploy=$(Configuration)" />
+    <!-- Notify user that we will deploy the current configuration to BizTalk but not initialise the Hosts/Handlers. -->
+    <Message
+      Condition=" '$(BizTalkApplicationName)'!='' And '%(ConfigurationToBuild.FlavorToBuild)'=='$(Configuration)' And '%(ConfigurationToBuild.DeployToBizTalkApplicationForTestRun)'=='true' And '%(ConfigurationToBuild.InitialiseBizTalkHostsAndHandlers)'!='true' "
+      Importance="high"
+      Text="Deploying '$(Configuration)' configuration to BizTalk (not initialising Hosts and Handlers)." />
+    <MSBuild
+      Condition=" '$(BizTalkApplicationName)'!='' And '%(ConfigurationToBuild.FlavorToBuild)'=='$(Configuration)' And '%(ConfigurationToBuild.DeployToBizTalkApplicationForTestRun)'=='true' And '%(ConfigurationToBuild.InitialiseBizTalkHostsAndHandlers)'!='true' "
+      Projects="$(MSBuildProjectFullPath)"
+      Targets="StopBizTalkApplication;RemoveBizTalkApplicationAssembliesFromGac;RemoveBizTalkApplication;CreateBizTalkApplication;ExportBizTalkApplication;ImportBindingsForBizTalkApplication;StartBizTalkApplication"
+      Properties="SolutionConfigurationToDeploy=$(Configuration)" />
   </Target>
 
   <Target Name="CoreRunTestsForConfiguration">

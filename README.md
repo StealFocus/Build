@@ -1,6 +1,10 @@
 StealFocus Build
 ================
-Re-usable build scripts.
+Re-usable build scripts. For examples, please look at the following:
+- [For simple .NET solutions](https://github.com/AcmeCorp/SimpleBuildSample)
+- [For ASP.NET MVC solutions](https://github.com/AcmeCorp/AspNetMvcBuildSample)
+- [For Azure solutions](https://github.com/AcmeCorp/AzureBuildSample)
+- [For BizTalk solutions](https://github.com/AcmeCorp/BizTalkBuildSample)
 
 Downloading
 -----------

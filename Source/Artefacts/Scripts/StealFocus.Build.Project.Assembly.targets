@@ -115,7 +115,8 @@
       DestinationFiles="@(WebProjectBinFolderFiles->'$(ProjectDir)bin\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
 
-  <Target Name="BeforeBuild" DependsOnTargets="GenerateAssemblyInfoFile">
+  <!-- Note: "$(BeforeBuildDependsOn)" added to "DependsOnTargets" for BizTalk support. -->
+  <Target Name="BeforeBuild" DependsOnTargets="GenerateAssemblyInfoFile;$(BeforeBuildDependsOn)">
     <Message Importance="high" Text="The project is $(MSBuildProjectName) ($(Configuration)|$(Platform))." />
     <Message Importance="high" Text="'SolutionDirectoryPath' is '$(SolutionDirectoryPath)'." />
     <Message Importance="high" Text="'BranchName' is '$(BranchName)'." />

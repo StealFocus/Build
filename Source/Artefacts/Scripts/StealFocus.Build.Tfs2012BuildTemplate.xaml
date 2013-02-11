@@ -416,6 +416,22 @@
                             </If.Then>
                           </If>
                           <If Condition="[Not DisableTests]" DisplayName="If Not DisableTests" mtbwt:BuildTrackingParticipant.Importance="Low">
+							<!-- Steal Focus: Task for "RunTestsForConfiguration" start. -->
+							<Sequence DisplayName="Run Tests For Configuration (Steal Focus Build)">
+							  <mtbwa:MSBuild 
+								CommandLineArguments="[String.Format(&quot;/p:IsTeamBuild=true /p:IsDesktopBuild=false /p:BranchName={0} /p:VersionNumber={1} /p:BuildDirectoryPath={2} /p:OutputPath={3} /p:BuildName={4} {5}&quot;, BranchName, VersionNumber, BinariesDirectory, outputDirectory, BuildDetail.BuildDefinition.Name, MSBuildArguments)]" 
+								Configuration="[platformConfiguration.Configuration]" 
+								DisplayName="MSBuild" 
+								LogFile="StealFocus.Build.RunTestsForConfiguration.log" 
+								LogFileDropLocation="[logFileDropLocation]" 
+								MaxProcesses="[MSBuildMaxProcesses]" 
+								Project="[SourcesDirectory + &quot;\&quot; + BuildFilePath]" 
+								RunCodeAnalysis="[RunCodeAnalysis]" 
+								Targets="[New String() {&quot;RunTestsForConfiguration&quot;}]" 
+								ToolPlatform="[MSBuildPlatform]" 
+								Verbosity="[Verbosity]" />
+							</Sequence>
+							<!-- Steal Focus: Task for "RunTestsForConfiguration" end. -->
                             <If.Then>
                               <Sequence DisplayName="Run Tests" mtbwt:BuildTrackingParticipant.Importance="Low">
                                 <If Condition="[Not TestSpecs Is Nothing]" DisplayName="If Not TestSpecs Is Nothing" mtbwt:BuildTrackingParticipant.Importance="Low">

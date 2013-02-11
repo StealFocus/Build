@@ -1060,7 +1060,9 @@
   </Target>
 
   <Target Name="CoreRunTestsForConfiguration">
-    <CallTarget Targets="RunMSTest;RunNUnit" />
+    <CallTarget 
+	  Condition=" '$(IsTeamBuild)'!='true' "
+	  Targets="RunMSTest;RunNUnit" />
   </Target>
 
   <Target Name="AfterRunTestsForConfiguration">

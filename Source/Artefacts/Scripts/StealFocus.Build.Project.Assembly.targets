@@ -124,7 +124,8 @@
     <Message Importance="high" Text="'ForceCodeGeneration' is '$(ForceCodeGeneration)'." />
   </Target>
 
-  <Target Name="AfterBuild" DependsOnTargets="RestoreBinariesToWebProjectBin">
+  <!-- Note: "$(AfterBuildDependsOn )" added to "DependsOnTargets" for BizTalk support. -->
+  <Target Name="AfterBuild" DependsOnTargets="RestoreBinariesToWebProjectBin;$(AfterBuildDependsOn)">
     <!-- This "AspNetCompiler" is here for ASP.NET MVC Projects but don't think this is needed as of ASP.NET MVC v3. -->
     <!--
     <AspNetCompiler
@@ -163,7 +164,8 @@
 
   <Target Name="AfterCompile" />
 
-  <Target Name="BeforeClean" />
+  <!-- Note: "$(BeforeCleanDependsOn )" added to "DependsOnTargets" for BizTalk support. -->
+  <Target Name="BeforeClean" DependsOnTargets="$(BeforeCleanDependsOn)" />
 
   <Target Name="AfterClean" />
 

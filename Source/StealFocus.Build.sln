@@ -14,9 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{CCD282DB-4EBC-45F7-BCD5-EEE614A82FB1}"
 	ProjectSection(SolutionItems) = preProject
 		Artefacts\Scripts\StealFocus.BclExtensions.dll = Artefacts\Scripts\StealFocus.BclExtensions.dll
-		Artefacts\Scripts\StealFocus.BclExtensions.pdb = Artefacts\Scripts\StealFocus.BclExtensions.pdb
 		Artefacts\Scripts\StealFocus.BizTalkExtensions.dll = Artefacts\Scripts\StealFocus.BizTalkExtensions.dll
-		Artefacts\Scripts\StealFocus.BizTalkExtensions.pdb = Artefacts\Scripts\StealFocus.BizTalkExtensions.pdb
 		Artefacts\Scripts\StealFocus.Build.BizTalk2010.targets = Artefacts\Scripts\StealFocus.Build.BizTalk2010.targets
 		Artefacts\Scripts\StealFocus.Build.IIS7.x.targets = Artefacts\Scripts\StealFocus.Build.IIS7.x.targets
 		Artefacts\Scripts\StealFocus.Build.MSDeploy2.1.targets = Artefacts\Scripts\StealFocus.Build.MSDeploy2.1.targets

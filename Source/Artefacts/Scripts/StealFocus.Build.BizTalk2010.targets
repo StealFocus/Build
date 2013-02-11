@@ -575,4 +575,6 @@
 
   <Target Name="BuildBizTalkApplication" DependsOnTargets="$(BuildBizTalkApplicationDependsOn)" />
 
+  <Target Name="DeleteBizTalkApplication" DependsOnTargets="RemoveBizTalkApplication;DeleteBizTalkHandlers;DeleteBizTalkHosts" />
+
 </Project>

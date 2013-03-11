@@ -619,17 +619,20 @@
   </Target>
 
   <Target Name="CoreSolutionCompileForConfiguration">
+    <Error 
+      Condition=" '%(AzureProject.Identity)'!='' And '$(DefaultAzureTargetProfile)'=='' "
+      Text="Please define a 'DefaultAzureTargetProfile' property with a value matching a profile e.g. 'Local' or 'Cloud' etc." />
     <!-- Compile with delay signing (it's a desktop build). -->
     <MSBuild
       Condition=" '$(IsDesktopBuild)'=='true' "
       Projects="$(Solution)"
-      Properties="Configuration=%(ConfigurationToBuild.FlavorToBuild);OutputPath=$(BuildDirectoryPath)\%(ConfigurationToBuild.FlavorToBuild);$(Properties)"
+      Properties="Configuration=%(ConfigurationToBuild.FlavorToBuild);OutputPath=$(BuildDirectoryPath)\%(ConfigurationToBuild.FlavorToBuild);TargetProfile=$(DefaultAzureTargetProfile);$(Properties)"
       Targets="$(Targets)" />
     <!-- Compile with full signing (it's a server build). -->
     <MSBuild
       Condition=" '$(IsDesktopBuild)'!='true' "
       Projects="$(Solution)"
-      Properties="Configuration=%(ConfigurationToBuild.FlavorToBuild);OutputPath=$(BuildDirectoryPath)\%(ConfigurationToBuild.FlavorToBuild);$(Properties);DelaySign=false;AssemblyOriginatorKeyFile=$(StrongNameKeyPairPath)"
+      Properties="Configuration=%(ConfigurationToBuild.FlavorToBuild);OutputPath=$(BuildDirectoryPath)\%(ConfigurationToBuild.FlavorToBuild);TargetProfile=$(DefaultAzureTargetProfile);$(Properties);DelaySign=false;AssemblyOriginatorKeyFile=$(StrongNameKeyPairPath)"
       Targets="$(Targets)" />
     <!-- Package/Publish configured projects. -->
     <MSBuild

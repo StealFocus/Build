@@ -96,7 +96,7 @@
       TaskAction="AddAttribute"
       File="$(ParametersXmlFilePath)"
       Element="/parameters/parameter[last()]/parameterValidation"
-      Key="type"
+      Key="kind"
       Value="RegularExpression" />
     <MSBuild.ExtensionPack.Xml.XmlFile
       TaskAction="AddAttribute"
@@ -114,7 +114,7 @@
       TaskAction="AddAttribute"
       File="$(ParametersXmlFilePath)"
       Element="/parameters/parameter[last()]/parameterEntry"
-      Key="type"
+      Key="kind"
       Value="DeploymentObjectAttribute" />
     <MSBuild.ExtensionPack.Xml.XmlFile
       TaskAction="AddAttribute"
@@ -168,7 +168,7 @@
       TaskAction="AddAttribute"
       File="$(ParametersXmlFilePath)"
       Element="/parameters/parameter[last()]/parameterEntry"
-      Key="type"
+      Key="kind"
       Value="DeploymentObjectAttribute" />
     <MSBuild.ExtensionPack.Xml.XmlFile
       TaskAction="AddAttribute"

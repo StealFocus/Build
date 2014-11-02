@@ -27,10 +27,6 @@
     <VisualStudioVersion>2010</VisualStudioVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(MSTestVersion)' == '' ">
-    <MSTestVersion>2010</MSTestVersion>
-  </PropertyGroup>
-
   <PropertyGroup Condition=" '$(MaxBuildTimeInMinutes)'=='' ">
     <MaxBuildTimeInMinutes>10</MaxBuildTimeInMinutes>
   </PropertyGroup>
@@ -316,9 +312,6 @@
     <Message
       Importance="high"
       Text="'MSTestResultsDirectoryPath' is '$(MSTestResultsDirectoryPath)'." />
-    <Message
-      Importance="high"
-      Text="'MSTestVersion' is '$(MSTestVersion)'." />
     <Message
       Importance="high"
       Text="'SdkPath' is '$(SdkPath)'." />

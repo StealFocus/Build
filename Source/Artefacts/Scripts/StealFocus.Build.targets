@@ -237,7 +237,7 @@
     </PropertyGroup>
     <Exec
       Condition=" !Exists('$(StateFilePath)') "
-      Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File $(MSBuildThisFileDirectory)\StealFocus.Build.ValidatePrerequisites.ps1 -currentDirectory $(MSBuildThisFileDirectory) -azurePublishActionRequired $(AzurePublishActionRequired)"
+      Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -NoProfile -File $(MSBuildThisFileDirectory)\StealFocus.Build.ValidatePrerequisites.ps1 -currentDirectory $(MSBuildThisFileDirectory) -azurePublishActionRequired $(AzurePublishActionRequired)"
       LogStandardErrorAsError="true"
       ContinueOnError="false"
       WorkingDirectory="." />

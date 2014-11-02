@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{6A09D61F-58E9-431B-82A2-63E13EBD7744}"
 	ProjectSection(SolutionItems) = preProject
 		Scripts\StealFocus.Build.CCNet.proj = Scripts\StealFocus.Build.CCNet.proj
@@ -18,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{CCD2
 		Artefacts\Scripts\StealFocus.Build.BizTalk2010.targets = Artefacts\Scripts\StealFocus.Build.BizTalk2010.targets
 		Artefacts\Scripts\StealFocus.Build.IIS7.x.targets = Artefacts\Scripts\StealFocus.Build.IIS7.x.targets
 		Artefacts\Scripts\StealFocus.Build.MSDeploy2.1.targets = Artefacts\Scripts\StealFocus.Build.MSDeploy2.1.targets
-		Artefacts\Scripts\StealFocus.Build.MSTest2010.targets = Artefacts\Scripts\StealFocus.Build.MSTest2010.targets
+		Artefacts\Scripts\StealFocus.Build.MSTest.targets = Artefacts\Scripts\StealFocus.Build.MSTest.targets
 		Artefacts\Scripts\StealFocus.Build.NUnit.targets = Artefacts\Scripts\StealFocus.Build.NUnit.targets
 		Artefacts\Scripts\StealFocus.Build.Project.Assembly.targets = Artefacts\Scripts\StealFocus.Build.Project.Assembly.targets
 		Artefacts\Scripts\StealFocus.Build.Project.BizTalk2010.targets = Artefacts\Scripts\StealFocus.Build.Project.BizTalk2010.targets

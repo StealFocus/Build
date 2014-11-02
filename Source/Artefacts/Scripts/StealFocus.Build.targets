@@ -93,7 +93,7 @@
   
   <Import
     Condition=" '$(MSTestVersion)'=='2010' "
-    Project="StealFocus.Build.MSTest2010.targets" />
+    Project="StealFocus.Build.MSTest.targets" />
 
   <Import Project="StealFocus.Build.NUnit.targets" />
 

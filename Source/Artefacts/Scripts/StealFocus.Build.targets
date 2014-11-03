@@ -27,10 +27,6 @@
     <VisualStudioVersion>2010</VisualStudioVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(MSTestVersion)' == '' ">
-    <MSTestVersion>2010</MSTestVersion>
-  </PropertyGroup>
-
   <PropertyGroup Condition=" '$(MaxBuildTimeInMinutes)'=='' ">
     <MaxBuildTimeInMinutes>10</MaxBuildTimeInMinutes>
   </PropertyGroup>
@@ -97,7 +93,7 @@
   
   <Import
     Condition=" '$(MSTestVersion)'=='2010' "
-    Project="StealFocus.Build.MSTest2010.targets" />
+    Project="StealFocus.Build.MSTest.targets" />
 
   <Import Project="StealFocus.Build.NUnit.targets" />
 
@@ -237,7 +233,7 @@
     </PropertyGroup>
     <Exec
       Condition=" !Exists('$(StateFilePath)') "
-      Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -File $(MSBuildThisFileDirectory)\StealFocus.Build.ValidatePrerequisites.ps1 -currentDirectory $(MSBuildThisFileDirectory) -azurePublishActionRequired $(AzurePublishActionRequired)"
+      Command="powershell -ExecutionPolicy Unrestricted -NonInteractive -NoProfile -File $(MSBuildThisFileDirectory)\StealFocus.Build.ValidatePrerequisites.ps1 -currentDirectory $(MSBuildThisFileDirectory) -azurePublishActionRequired $(AzurePublishActionRequired)"
       LogStandardErrorAsError="true"
       ContinueOnError="false"
       WorkingDirectory="." />
@@ -316,9 +312,6 @@
     <Message
       Importance="high"
       Text="'MSTestResultsDirectoryPath' is '$(MSTestResultsDirectoryPath)'." />
-    <Message
-      Importance="high"
-      Text="'MSTestVersion' is '$(MSTestVersion)'." />
     <Message
       Importance="high"
       Text="'SdkPath' is '$(SdkPath)'." />
